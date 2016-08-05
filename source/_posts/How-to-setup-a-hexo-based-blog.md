@@ -14,7 +14,7 @@ date: 2016-08-04 19:04:02
 
 # Installation
 ## Basic
-```bash
+``` bash
 npm install hexo-cli -g
 hexo init blog-hexo
 cd blog-hexo
@@ -22,16 +22,16 @@ cd blog-hexo
 Now you have the blog in the folder blog-hexo
 
 ## Install plugin
-```bash
+``` bash
 npm install hexo-deployer-git --save
 npm install hexo-generator-feed --save
 ```
-
+<!-- more -->
 # Config
 edit _config.yml file
 
 ## Try out
-```bash
+``` bash
 hexo s
 ```
 
@@ -41,7 +41,7 @@ hexo s
 
 ## setup local git
 in the blog-hexo folder, init git
-```bash
+``` bash
 git init
 #update .gitignore file
 git add .
@@ -54,16 +54,16 @@ https://help.github.com/articles/adding-an-existing-project-to-github-using-the-
 now you have your blog original file under version control
 
 # Theme
-```bash
+``` bash
 git clone https://github.com/klugjo/hexo-theme-clean-blog.git themes/clean-blog
-```bash
+``` 
 update _config.yml file
 check in all files from theme to git
 
 # new PC
 git clone hexo-blog repo
 in the folder, run
-```bash
+``` bash
 npm install hexo
 npm install
 ```

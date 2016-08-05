@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: this.Think();
+title: feng.blog();
 subtitle:
 description:
 author: Feng Lu
 language: en
-timezone: NO
+timezone: Europe/Oslo
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -63,7 +63,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: clean-blog
+theme: next
+#theme: corporate
 
 feed:
   type: atom
