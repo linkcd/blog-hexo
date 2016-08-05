@@ -1,3 +1,6 @@
 [submodule "next"]
     path = themes/next
     url = https://github.com/iissnan/hexo-theme-next
+[submodule "themes/next-linkcd"]
+	path = themes/next-linkcd
+	url = https://github.com/linkcd/hexo-theme-next
