@@ -71,7 +71,29 @@ public/
 .deploy*/
 *~
 *.swp
-``` 
-Done, from now on you can use the standard Git commands to control all your articles.
+```
+
+Done, from now on you can use the standard Git commands to manage the source code of your articles. You do not need to verson control the public folder, as it only contains the generated html/css files.
+
+# Host in online #
+In order to bring your blog online, we can use Git Pages.
+
+## Setup Git repository ##
+Simply apply for a special Git repository: <your_account_name>.github.io, then turn on the Git Pages feature. 
+**Note** that you will never need to clone this repository to your local.
+
+## Deploy ##
+Modify your _config.xml file to specify the git repository address:
+``` bash
+	deploy:
+	  type: git
+	  repo: 
+	    github: https://github.com/linkcd/linkcd.github.io.git
+```
+
+Then you can run below to publish (as far as you has installed hexo-deployer-git plugin):
+``` bash
+	hexo d
+```
 
 In next article, we will dive into the interesting parts of Hexo: Switching between PC, Theme and Git process.
