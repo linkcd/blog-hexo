@@ -96,4 +96,7 @@ Then you can run below to publish (as far as you has installed hexo-deployer-git
 	hexo d
 ```
 
+## Done ##
+You can head to https://linkcd.github.io to open your blog.
+
 In next article, we will dive into the interesting parts of Hexo: Switching between PC, Theme and Git process.
