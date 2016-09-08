@@ -64,5 +64,10 @@ It also works in Github webpage
 {% asset_img "Next-linkcd submodule in github.png" "Next-linkcd git submodule in Github" %}
 Please note that the "git stamp" is **d82e379** for both place.
 
+# Update theme #
+Now you are free to modify your theme. To push theme changes back to Github, follow below:
+1. git add, commit and push in **next-linkcd** folder
+2. git add, commit and push in **blog-hexo** folder, even you have not modify anyting in your blog. 
+
 
  
