@@ -4,6 +4,7 @@ date: 2016-08-05 18:59:19
 tags:
 - hexo
 - github
+- git
 - blog
 ---
 

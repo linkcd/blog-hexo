@@ -1,9 +1,10 @@
 ---
 title: 'How to setup a hexo-based blog: Part 2'
-date: 2016-09-08 20:01:06
+date: 2016-08-12 20:01:06
 tags:
 - hexo
 - github
+- git
 - blog
 ---
 
