@@ -1,5 +1,6 @@
 ---
 title: 'How to setup a hexo-based blog: Part 2'
+date: 2016-09-08 20:01:06
 tags:
 - hexo
 - github
@@ -12,15 +13,15 @@ Previously we have setup and published the hexo-based blog. The article source c
 As most hexo tutorials, the next step is to change the default theme. There are [lots of themes](https://hexo.io/themes/) that you can choose from. However, most of the theme simply ask you to clone itself under the themes folder. 
 
 In this case, we will use the popular theme [NexT](https://github.com/iissnan/hexo-theme-next). Its document specified follow below steps:
-- install
+- Install
 ```bash
 git clone https://github.com/iissnan/hexo-theme-next themes/next
 ```
-- update the _config.yml to use this theme
+- Update the _config.yml to use this theme
 ```bash
 theme: next
 ```
-- pull the theme update when it is needed 
+- Pull the theme update when it is needed 
 ```bash
 cd theme/next
 git pull
@@ -47,27 +48,45 @@ Technically we created a **nested git repository structure**: there is a git rep
 # The right way #
 As our customized theme became an independent component component of the blog system, it requires proper version control of it. 
 
-1. fork theme project
-By doing this, you can properly verion control your modification of your theme, but still have the possiblity to keep it up-to-date.
-2. create Git submodule which named "next-linkcd", means it's our version of NexT theme.
+1. Fork theme project
+By doing this, you can properly version control your modification of your theme, but still have the possibility to keep it up-to-date. The fork version is https://github.com/linkcd/hexo-theme-next.
+
+2. Create Git submodule which named "next-linkcd" (means it's our own version of NexT theme), and points to https://github.com/linkcd/hexo-theme-next.
 ```bash
 cd blog-hexo
 git submodule add https://github.com/linkcd/hexo-theme-next themes/next-linkcd
 ```
-3. ask hexo to use this theme
+3. Ask hexo to use our own theme
 ```bash
 theme: next-linkcd
 ```
-4. now you have 2 seperated repositories, one for your blog-hexo, and one for your own theme. You can run below command to see the relatioship.
+4. Now you have 2 separated repositories, one for your blog-hexo, and one for your own theme. You can run below command to see the relationship.
 {% asset_img "Next-linkcd git submodule command line.png" "Next-linkcd git submodule in command line" %}
 It also works in Github webpage
 {% asset_img "Next-linkcd submodule in github.png" "Next-linkcd git submodule in Github" %}
 Please note that the "git stamp" is **d82e379** for both place.
 
-# Update theme #
+# Customize theme #
 Now you are free to modify your theme. To push theme changes back to Github, follow below:
-1. git add, commit and push in **next-linkcd** folder
-2. git add, commit and push in **blog-hexo** folder, even you have not modify anyting in your blog. 
+1. Git add, commit and push in **next-linkcd** folder
+2. Git add, commit and push in **blog-hexo** folder, even you have not modify anything in your blog. 
 
+# Restore your blog in a new PC #
+By following up above steps, it is pretty easy to restore your blog in another PC. 
 
+1. Restore source code from Github
+	```bash
+	git clone https://github.com/linkcd/blog-hexo.git
+	cd blog-hexo
+	git submodule update --init
+	```
+	{% asset_img "Restore-blog.png" "Restore blog" %}
+2. Re-install hexo program.
+	There is no need to re-install plug-ins.
+	```bash
+	cd blog-hexo
+	npm install hexo
+	npm install
+	```
+3. Done
  
