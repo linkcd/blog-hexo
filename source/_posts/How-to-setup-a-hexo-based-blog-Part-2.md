@@ -2,10 +2,10 @@
 title: 'How to setup a hexo-based blog: Part 2'
 date: 2016-08-12 20:01:06
 tags:
-- hexo
-- github
-- git
-- blog
+- Hexo
+- Github
+- Git
+- Blog
 ---
 
 Previously we have setup and published the hexo-based blog. The article source code and the hexo configuration files are under git version control.  

@@ -2,10 +2,10 @@
 title: 'How to setup a hexo-based blog: Part 1'
 date: 2016-08-05 18:59:19
 tags:
-- hexo
-- github
-- git
-- blog
+- Hexo
+- Github
+- Git
+- Blog
 ---
 
 [Hexo](https://hexo.io/) is a simple and powerful blog framework that allows you setup your blog quickly and easily.  
