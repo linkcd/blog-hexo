@@ -72,9 +72,14 @@ Now you are free to modify your theme. To push theme changes back to Github, fol
 1. Git add, commit and push in **next-linkcd** folder
 2. Git add, commit and push in **blog-hexo** folder, even you have not modify anything in your blog. 
 
-# Restore your blog in a new PC #
-By following up above steps, it is pretty easy to restore your blog in another PC. 
+# Sync between two PC #
+```bash
+cd blog-hexo
+git pull
+git submodule update
+```
 
+# Restore your blog in a new PC #
 1. Restore source code from Github
 	```bash
 	git clone https://github.com/linkcd/blog-hexo.git
