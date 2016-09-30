@@ -52,28 +52,24 @@ Once the streaming analytic instance was created, setup the inputs. We will need
 ## Setup inputs ##
 
 ### Talk about the Path Pattern first ###
-According to the document, the **Path Pattern** property of input should follow format yourApplicationInsightName)_(yourkey)/(yourTelemtryType)/*{date}/{time}*.
+According to [the document](https://azure.microsoft.com/en-us/documentation/articles/app-insights-export-power-bi/), the **Path Pattern** property of input should follow format (yourApplicationInsightName)_(yourkey)/(yourTelemtryType)/*{date}/{time}*.
 
-The *gateway-appinsight-production_(the key)* part can be simply copied from the storage account page. 
+Firstly, the *(yourApplicationInsightName)_(yourkey)* part can be simply copied from the storage account page. 
 {% asset_img "Path in storage account.png" "Path in storage account" %}
 
-However, due to some unknown reason, if you specify *{date}/{time}*, it always failed to get input. 
+Secondly, please note that the *yourTelemtryType* (in this case, PageViews and Availability) is case sensitive!
 
-{% asset_img "Error in sampling input data.png" "Error in sampling input data" %} 
-
-Error message:
-*No events found for 'ai-pageviews'. Start time: Thursday, September 29, 2016, 1:00:00 AM End time: Friday, September 30, 2016, 1:00:00 AM Last time arrival: Thursday, January 1, 1970, 1:00:00 AM Diagnostics: While sampling data, no data was received from '1' partitions.*
-
-Fortunately, as we need ALL telemetry data at anytime, the workaround is to remove the *{date}/{time}* part. So, the new Path Pattern is "(yourApplicationInsightName)_(yourkey)/(yourTelemtryType)/"
+Finally, make sure the date format is "YYYY-MM-DD", not the default "YYYY/MM/DD". 
 
 ### Input of PageViews and Availability ### 
 {% asset_img "setup input.png" "setup input" %} 
 
-Path Pattern: 
-	- PageViews: *gateway-appinsight-production_(the key)/PageViews/*
-	- Availability: *gateway-appinsight-production_(the key)/Availability/*
+### Test the sample data ###
+You should always verify the input settings by test the sample data. For example, if we forgot the set data format, you will get below error.
+{% asset_img "Error in sampling input data.png" "Error in sampling input data" %} 
 
-You can also make sure that these inputs are correct by testing the sample data.
+Error message:
+*No events found for 'ai-pageviews'. Start time: Thursday, September 29, 2016, 1:00:00 AM End time: Friday, September 30, 2016, 1:00:00 AM Last time arrival: Thursday, January 1, 1970, 1:00:00 AM Diagnostics: While sampling data, no data was received from '1' partitions.*
 
 ## Setup outputs ##
 
