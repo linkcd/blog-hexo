@@ -20,3 +20,7 @@ You can modify the color schema by editing the C:\Users\yourname\.gitconfig file
 Now it is much easier to read.
 {% asset_img "Easier to read.png" "Easier to read" %}
 
+Done.
+
+Ref:
+http://jblevins.org/log/git-colors
