@@ -1,5 +1,5 @@
 ---
-title: Web test against an ADFS federated application
+title: Web/Load testing against an ADFS federated application
 tags:
   - ADFS
   - Web Testing
@@ -47,7 +47,7 @@ If you setup the multiple step web test with this script, after the token with a
 	{% asset_img "5 Form posted and got authenticated cookie.png" "Step 5: Form posted and got authenticated cookie" %}
 
 ## Setup script ##
-In the script, we have following setup:
+In the script, we have following setup: (Please note that the script is accessing a specify application URL: "/notifications", instead of the root URL "/")
 	{% asset_img "Test steps.png" "Test steps" %}
  
 1. Conduct a directly **POST** call to ADFS URL
@@ -57,11 +57,15 @@ In the script, we have following setup:
 2. Once we got the response, extract from context parameter _cert
 	{% asset_img "Extract hidden field.png" "Extract hidden field to a variable _cert" %}
  
-3. Conduct a directly **POST** call to application URL, with values that we extracted from previous call to ADFS
+3. Conduct a directly **POST** call to application URL , with values that we extracted from previous call to ADFS
 	{% asset_img "Pass values from hidden field.png" "Pass values from hidden field" %}
  
 4. From now on, you can continue the testing with more URLs of the application, without passed values from hidden fields as we did in above. 
+# Load Testing #
+As far as the web testing script is ready, you can quickly load them into the load test cases. 
+{% asset_img "Load testing results.png" "Load testing results" %}
 
 # Ref #
-http://southworks.com/blog/2013/01/03/load-testing-adfs-federated-sharepoint-applications/
-https://blogs.msdn.microsoft.com/zwsong/2014/07/23/load-testing-saml-ping-based-sharepoint-2013-sites/ 
+There are two similar posts about authentication of ADFS:
+- http://southworks.com/blog/2013/01/03/load-testing-adfs-federated-sharepoint-applications/
+- https://blogs.msdn.microsoft.com/zwsong/2014/07/23/load-testing-saml-ping-based-sharepoint-2013-sites/ 

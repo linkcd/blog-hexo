@@ -1,6 +1,6 @@
 ---
 title: Change Git color
-date: 2016-09-25 14:53:04
+date: 2016-08-27 14:53:04
 tags:
   - Git
 ---
@@ -8,6 +8,8 @@ Git has a default color schema for showing information. However, sometimes it is
 {% asset_img "Difficult to read the dark red text.png" "Difficult to read the dark red text" %}
 
 You can modify the color schema by editing the C:\Users\yourname\.gitconfig file as below
+
+<!-- more -->
 ```bash
 [color]
   ui = true
@@ -22,5 +24,3 @@ Now it is much easier to read.
 
 Done.
 
-Ref:
-http://jblevins.org/log/git-colors

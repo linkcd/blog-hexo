@@ -270,7 +270,7 @@ GO
 3. Manage the relationship between them
 4. Start creating charts. Remember to set HourlySeriesInFormat to "show item without data", and hide items that HourlySeriesInFormat is Blank (means it is out of the time series scope. It is too old)
       
-
+{% asset_img "Sample of PowerBi dashboard.png" "Sample of PowerBi dashboard" %}
 
  
  
