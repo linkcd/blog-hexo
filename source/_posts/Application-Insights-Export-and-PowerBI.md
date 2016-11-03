@@ -2,7 +2,7 @@
 title: Application Insights Export and PowerBI
 tags:
   - Azure
-  - Application insights
+  - Application Insights
   - Monitoring
   - PowerBI
   - DevOps

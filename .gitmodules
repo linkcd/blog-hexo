@@ -4,3 +4,6 @@
 [submodule "themes/next-linkcd"]
 	path = themes/next-linkcd
 	url = https://github.com/linkcd/hexo-theme-next
+[submodule "themes/icarus-linkcd"]
+	path = themes/icarus-linkcd
+	url = https://github.com/linkcd/hexo-theme-icarus.git
