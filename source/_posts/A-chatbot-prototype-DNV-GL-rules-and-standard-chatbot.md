@@ -31,6 +31,9 @@ or
 
 {% asset_img "slack conversation.png" "Slack conversation" %}
 
+or
+
+{% asset_img "skype conversation on phone.png" "skype conversation on phone" %}
 
 **Disclaimer**
 This chatbot prototype is a personal project. It is only based on the public information of the DNV GL documents. It has NO connection with DNV GL AS. All information from the chatbot is presented 'as-is'. No warranties whatsoever for correctness; completeness or usefulness.
