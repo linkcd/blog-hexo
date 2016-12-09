@@ -25,7 +25,7 @@ There is a preview:
 - Currently it supports 3 channels: Web Chat, Skype and Slack.
 - All data is from the publicly available information of DNV GL service document.
 
-{% asset_img "web conversation.png" "Web page conversation" %}
+{% asset_img "web page conversation.png" "Web page conversation" %}
 
 or
 
