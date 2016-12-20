@@ -153,7 +153,7 @@ SELECT
     ,GetRecordPropertyValue(GetArrayElement(A.[availability], 0), 'testTimestamp') as [TimeStamp]
     ,GetRecordPropertyValue(GetArrayElement(A.[availability], 0), 'testName') as name
     ,GetRecordPropertyValue(GetArrayElement(A.[availability], 0), 'runLocation') as location
-    ,GetRecordPropertyValue(GetArrayElement(A.[availability], 0), 'message') as message
+    ,SUBSTRING(GetRecordPropertyValue(GetArrayElement(A.[availability], 0), 'message'), 1, 300) as message
     ,GetRecordPropertyValue(GetRecordPropertyValue(GetArrayElement(A.[availability], 0), 'durationMetric'), 'value') as [Duration]
 INTO
     [output-ai-availability]
