@@ -10,13 +10,13 @@ tags:
 ---
 At the end of March 2016, Microsoft announced the [Bot Framework](https://bots.botframework.com/), a platform that helps you to quickly build the high quality bots for your business. 
 
-After a long weekend happy hacking, I have built a chatbot prototype who can help you to find [DNV GL service document](https://rules.dnvgl.com/servicedocuments/dnvgl).  
+In April, after a long weekend happy hacking, I have built a chatbot prototype who can help you to find [DNV GL service document](https://rules.dnvgl.com/servicedocuments/dnvgl).  
 
 <!-- more -->
 You can head to https://dnvgl-rs-bot.azurewebsites.net/ to have a chat with it, or via skype and slack.
 
-There is a preview:
-{% iframe "https://webchat.botframework.com/embed/DNVGL_RS_BOT?s=LKtmYpdq6Tk.cwA.fnQ.HKq6uLosO1bpUjqHck8lenJKiyGBVPgBdfTy3-x7FtY" %}
+There is a live preview:
+{% iframe "https://webchat.botframework.com/embed/dnvgl_rules_chatbot?s=KQCouIDFcKo.cwA.SbA.42Rxpjge3qYjONDPZGkMDzpHy5RDTGtZhDlXyAZ9BOU" %}
 
 **Some facts about it:**
 - It understands human language (English), thanks to the integrated Microsoft [Language Understanding Intelligent Service](https://www.luis.ai/Home/About). It can be extended to support such as Chinese or Spanish. 

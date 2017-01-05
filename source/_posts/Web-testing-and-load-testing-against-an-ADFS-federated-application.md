@@ -60,7 +60,10 @@ In the script, we have following setup: (Please note that the script is accessin
 3. Conduct a directly **POST** call to application URL , with values that we extracted from previous call to ADFS
 	{% asset_img "Pass values from hidden field.png" "Pass values from hidden field" %}
  
-4. From now on, you can continue the testing with more URLs of the application, without passed values from hidden fields as we did in above. 
+4. From now on, you can continue the testing with more URLs of the application, without passed values from hidden fields as we did in above.
+5. Successed tests
+{% asset_img "Successed tests.png" "Successed tests" %} 
+
 # Load Testing #
 As far as the web testing script is ready, you can quickly load them into the load test cases. 
 {% asset_img "Load testing results.png" "Load testing results" %}
