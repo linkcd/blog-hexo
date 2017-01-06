@@ -23,7 +23,7 @@ Our ASP.Net Web API application is already instrumented with Application Insight
 
 By following the [documentation](https://docs.microsoft.com/en-us/azure/application-insights/app-insights-api-custom-events-metrics), we have below code in the server side for sending the performance data of each API request:
 
-{% codeblock lang:c# %}
+{% codeblock lang:c %}
 var properties = new Dictionary<string, string>{
     { "ElapsedMilliseconds", apiCall.ElapsedMilliseconds.ToString()},
     { "ContractName", apiCall.ContractName},
