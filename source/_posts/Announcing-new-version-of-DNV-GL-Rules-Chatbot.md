@@ -1,6 +1,6 @@
 ---
 title: Announcing new version of DNV GL Rules Chatbot
-date: 2017-01-07 20:45:31
+date: 2017-01-07 19:40:31
 tags:
   - chatbot
   - artificial intelligence 
@@ -9,12 +9,13 @@ tags:
   - prototype
   - SharePoint PnP
 ---
+Happy new year! 
+
 I am happy to announce the new version of DNV GL Rules Chatbot is ready now. The key new features are below:
 -  Support full text search (based on SharePoint Search)
 -  Indexing DNV GL rules documents with enhanced metadata
 -  Customized ranking  
 -  Upgraded to Bot Framework 3.0
--  Supported new channel: Microsoft Teams
 
 **URL**:
 https://dnvgl-rules-bot.azurewebsites.net
