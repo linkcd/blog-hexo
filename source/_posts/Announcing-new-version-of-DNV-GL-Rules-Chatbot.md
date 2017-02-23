@@ -1,5 +1,5 @@
 ---
-title: Announcing new version of Ship Classification Rules Chatbot
+title: Announcing new version of DNV GL Rules Chatbot
 date: 2017-01-07 19:40:31
 tags:
   - chatbot
@@ -13,7 +13,7 @@ Happy new year!
 
 I am happy to announce the new version of Rules Chatbot is ready now. The key new features are below:
 -  Support full text search (based on SharePoint Search)
--  Indexing ship classification rules rules documents with enhanced metadata
+-  Indexing DNV GL classification rules documents with enhanced metadata
 -  Customized ranking  
 -  Upgraded to Bot Framework 3.0
 
