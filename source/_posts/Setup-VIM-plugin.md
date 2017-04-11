@@ -1,14 +1,16 @@
 ---
 title: Setup VIM plugin
-date: 2017-04-11 11:53:53
+date: 2017-04-09 11:53:53
 tags:
 	- Vim
 	- Plugin
-	- Vim-Plug
+	- Vim-plug
 ---
 Time to revisit my VIM plugin system after VIM is upgraded to version 8.0
 
 Previously I was using [Vundle](https://github.com/VundleVim/Vundle.vim) but it is bit complicate to set up quickly. This time I am using [vim-plug](https://github.com/junegunn/vim-plug).
+
+<!-- more -->
 
 # Install Vim 8.0 on a clean window 10 system #
 By default the installer creates
