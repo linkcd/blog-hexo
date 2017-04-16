@@ -1,5 +1,5 @@
 ---
-title: Tracking subdomains by GTM
+title: Tracking subdomains with Google Tag Manager
 date: 2017-04-16 21:10:06
 tags:
 -	Google Tag Manager
