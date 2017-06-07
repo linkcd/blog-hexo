@@ -4,7 +4,6 @@ date: 2017-04-09 11:53:53
 tags:
 	- Vim
 	- Plugin
-	- Vim-plug
 ---
 Time to revisit my VIM plugin system after VIM is upgraded to version 8.0
 
