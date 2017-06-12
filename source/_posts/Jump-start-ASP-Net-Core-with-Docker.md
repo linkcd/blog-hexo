@@ -159,7 +159,9 @@ docker run -d -p 8090:80 -t aspnetcore_docker:latest
 ```
 - "**-d**": Run container in background and print container ID
 - "**-p 8090:80**": Map port 8090 on the host machine to port 80 of the container (Port 80 was specified in Dockerfile)
-- "**-t**": Specify the image 
+- "**-t**": Allocate a pseudo-tty. For interactive processes (like a shell), you must use -i -t together in order to allocate a tty for the container process. -i -t is often written -it.
+- "**aspnetcore_docker:latest**": Specify the image and version (optional) 
+Note: Anything before the image name is paramter to docker command. Anything after image name  will be considered as arguments to the running container process.It means that you should put -d or -p before image name.
 
 {% asset_img "Run in Docker.png" "Run in Docker" %}
 
