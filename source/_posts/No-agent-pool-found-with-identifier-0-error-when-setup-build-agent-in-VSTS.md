@@ -2,7 +2,7 @@
 title: No agent pool found with identifier 0 error when setup build agent in VSTS
 tags:
   - VSTS
-  - Trouble Shooting
+  - Troubleshooting
   - Build
 date: 2016-11-19 15:39:32
 ---

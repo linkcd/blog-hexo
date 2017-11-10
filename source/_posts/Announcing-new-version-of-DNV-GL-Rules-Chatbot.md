@@ -2,11 +2,11 @@
 title: Announcing new version of DNV GL Rules Chatbot
 date: 2017-01-07 19:40:31
 tags:
-  - chatbot
-  - artificial intelligence 
-  - machine learning 
-  - Microsoft Language Understanding Intelligent Service
-  - prototype
+  - Chatbot
+  - Artificial Intelligence 
+  - Machine Learning 
+  - Microsoft language understanding intelligent service
+  - Prototype
   - SharePoint PnP
 ---
 Happy new year! 

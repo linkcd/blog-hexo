@@ -2,11 +2,11 @@
 title: A chatbot prototype - DNV GL rules and standard chatbot
 date: 2016-09-25 08:06:15
 tags:
-  - chatbot
-  - artificial intelligence 
-  - machine learning 
-  - Microsoft Language Understanding Intelligent Service
-  - prototype
+  - Chatbot
+  - Artificial Intelligence 
+  - Machine Learning 
+  - Microsoft language understanding intelligent service
+  - Prototype
 ---
 **(Edited 2017-01-07: The newer version of Chatbot is at [here](/2017/01/07/Announcing-new-version-of-DNV-GL-Rules-Chatbot/)).**
 
