@@ -2,8 +2,8 @@
 title: Web/Load testing against an ADFS federated application
 tags:
   - ADFS
-  - Web testing
-  - Load testing
+  - Web Testing
+  - Load Testing
   - Application Insights
 date: 2016-10-29 20:25:07
 ---
