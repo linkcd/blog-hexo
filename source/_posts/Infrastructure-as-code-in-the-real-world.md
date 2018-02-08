@@ -123,27 +123,49 @@ To automate this process, we can look into [Azure RM template functions](https:/
 
 Now we use this function for passing keys from storage account, and direclty use **InstrumentationKey** property to get the key from application insight.
 ```json
-"appSettings": [
-    {
-      "name": "WEBSITE_NODE_DEFAULT_VERSION",
-      "value": "6.11.1"
-    },
-    {
-      "name": "STORAGE_ACCOUNT",
-      "value": "[variables('storageAccountName')]"
-    },
-    {
-      "name": "STORAGE_ACCESSKEY",
-      "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2016-01-01').keys[0].value]"
-    },
-    {
-      "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
-      "value": "[reference(resourceId('microsoft.insights/components', variables('appinsightName')), '2015-05-01').InstrumentationKey]"
-    }
-  ]
+{
+ "name": "[parameters('webAppName')]",
+ "type": "Microsoft.Web/sites",
+  ....
+	"appSettings": [
+	    {
+	      "name": "WEBSITE_NODE_DEFAULT_VERSION",
+	      "value": "6.11.1"
+	    },
+	    {
+	      "name": "STORAGE_ACCOUNT",
+	      "value": "[variables('storageAccountName')]"
+	    },
+	    {
+	      "name": "STORAGE_ACCESSKEY",
+	      "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2016-01-01').keys[0].value]"
+	    },
+	    {
+	      "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+	      "value": "[reference(resourceId('microsoft.insights/components', variables('appinsightName')), '2015-05-01').InstrumentationKey]"
+	    }
+	  ]
+....
 ```
+In addtion, make sure we add dependencies into website resource, to make sure that we have created the storage account and application insight before the website is created
+```json
+ {
+   "name": "[parameters('webAppName')]",
+   "type": "Microsoft.Web/sites",
+  ....
+    "dependsOn": [
+      "[concat('Microsoft.Web/serverfarms/', variables('serverFarmName'))]",
+      "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
+      "[concat('microsoft.insights/components/', variables('appinsightName'))]"
+    ]
+.....
+```
+ 
+
 Double check in application settings:
 {% asset_img "Pass keys into application settings automatically.png" "Pass keys into application settings automatically" %}
+
+The updated code can be found at [here](https://github.com/linkcd/real-life-infra-as-code/commit/c24b08c6c911e78d1e290c91d96239fc932ea51f#diff-a1a51d4f1a0a39019e4af23a1789b227).
 
 
 # Let's recap  #
