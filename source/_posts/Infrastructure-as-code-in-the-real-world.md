@@ -69,6 +69,7 @@ It can be simply achieved by [using Azure Resource Manager template](https://doc
 
 Tips: 
 1. [Azure quickstart template](https://github.com/Azure/azure-quickstart-templates "Azure quickstart template") is a good place to start.
+2. The official and latest schema can be found at https://docs.microsoft.com/en-us/azure/templates/, for example [the web site schema](https://docs.microsoft.com/en-us/azure/templates/microsoft.web/sites). 
 2. If you have VS2017, you can use the built-in template Azure Resource Group. 
 3. you can create the resources manually, then export them in json format by going to https://resources.azure.com/ 
 
@@ -90,7 +91,7 @@ Deploy-AzureResourceGroup.ps1 -ResourceGroupName 'Real-life-infra-as-code-manual
 ```
 Pay attention to the switch parameter: **-ValidateOnly**. Without it, you can actually provision resources.
 
-{% asset_img "Powershell for validating infra-as-code .png" "Powershell for validating infra-as-code " %}
+{% asset_img "Powershell for validating infra-as-code.png" "Powershell for validating infra-as-code" %}
 
 As alternative, you can run 
 ```powershell
@@ -98,26 +99,63 @@ Test-AzureRmResourceGroupDeployment -ResourceGroupName 'Real-life-infra-as-code-
 ```
 
 ## Auto passing keys from newly created resources##
-It is nice to let the script to create resources for us, but at this moment we still have to manually copy keys and connection strings from application-insight and storage account into web site app settings. 
+It is nice to let the script to create resources for us, but there is only a hard-coded value that we specified in the json file is stored in application settings. Therefore we still have to manually copy keys and connection strings from application-insight and storage account into web site app settings. 
 
+{% asset_img "Hard-coded application settings.png" "Hard-coded application settings" %}
 ```json
-      "properties": {
-        "name": "[parameters('webAppName')]",
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serverFarmName'))]",
-        "clientAffinityEnabled": false,
-        "siteConfig": {
-          "javaVersion": "Off",
-          "phpVersion": "Off",
-          "pythonVersion": "Off",
-          "appSettings": [
-            {
-              "name": "WEBSITE_NODE_DEFAULT_VERSION",
-              "value": "6.11.1"
-            }
-          ]
+{
+  "name": "[parameters('webAppName')]",
+  "type": "Microsoft.Web/sites",
+  .........
+  "properties": {
+    "siteConfig": {
+       .........
+      "appSettings": [
+        {
+          "name": "WEBSITE_NODE_DEFAULT_VERSION",
+          "value": "6.11.1"
         }
-      }
+      ]
+    }
+.... 
 ```
+To automate this process, we can look into [Azure RM template functions](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-functions). The function [listkeys and listvalue](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-functions-resource#listkeys-and-listvalue) is useful for fetching values of a resource. 
+
+Now we use this function for passing keys from storage account, and direclty use **InstrumentationKey** property to get the key from application insight.
+```json
+"appSettings": [
+    {
+      "name": "WEBSITE_NODE_DEFAULT_VERSION",
+      "value": "6.11.1"
+    },
+    {
+      "name": "STORAGE_ACCOUNT",
+      "value": "[variables('storageAccountName')]"
+    },
+    {
+      "name": "STORAGE_ACCESSKEY",
+      "value": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2016-01-01').keys[0].value]"
+    },
+    {
+      "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+      "value": "[reference(resourceId('microsoft.insights/components', variables('appinsightName')), '2015-05-01').InstrumentationKey]"
+    }
+  ]
+```
+Double check in application settings:
+{% asset_img "Pass keys into application settings automatically.png" "Pass keys into application settings automatically" %}
 
 
+# Let's recap  #
+1. Now we have a basic infra-as-code that can provision multiple identical environments.
+2. It can connect different resources together by automatically passing keys from resource to another.
+3. We have tools and scripts to verify the infra-as-code    
 
+# What is next? #
+In the coming articles, we will continue addressing the following challenges: 
+- Different environments are 90% identical, but we have to handle the 10% differences
+- We cannot include secrets (e.g. database password and keys) in version control.  
+- We want to release without downtime.
+- We want to release new version fast, with quality control
+
+To be continued.
