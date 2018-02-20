@@ -18,7 +18,9 @@ It has be been a while since my last post. It is because I was quite busy leadin
 
 It actually is a long and interesting story behind veracity (and its predecessor), together with all challenges that we encountered in this journey. Hopefully I can share them with you in the future.
 
-Anyway, today I would like to talk about in the real world, how Infrastructure-as-Code looks like, together with Azure and VSTS.     
+Anyway, today I would like to talk about in the real world, how Infrastructure-as-Code looks like, together with Azure and VSTS.   
+
+{% asset_img "infrastructure-as-code.png" "picture credit: future-processing.pl" %}  
 
 <!-- more -->
 # Challenges #
