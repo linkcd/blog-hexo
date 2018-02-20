@@ -1,6 +1,6 @@
 ---
 title: Using python to organize pictures
-date: 2017-06-07 19:46:05
+date: 2017-05-17 19:46:05
 tags: 
 -	Python
 -	Scripting
