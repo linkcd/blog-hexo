@@ -99,7 +99,7 @@ Also, connect the wallet to the our node
 If you are looking for neighbors, or would like to connect your wallet to this node, please feel free to let me know. 
 If you would like to donate, please use the following address. :)
 ```
-MBCGRU9NLP9UPPRGXANYPDZQPCEBXFULNCVLLMWQDGJXSUUFILIS9ETTTIOEXHRPRLCMDUTVQXOEWMFLDROSGKXETB
+LPQRSZKJM9IRXHMUYJZQLKMAKJHJQDERJWIPSLKCYAPXVZPGEWG9QDXQUNTXCMZYLLIHPHGULVGFIAZAWDFECWYKGC
 ``` 
 
 EoF.
