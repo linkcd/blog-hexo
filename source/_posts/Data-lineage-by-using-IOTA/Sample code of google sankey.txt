@@ -1,0 +1,16 @@
+https://developers.google.com/chart/interactive/docs/gallery/sankey
+
+data.addRows([
+          [ 'Sensor A', 'Data cleaner X', 15 ],
+          [ 'Sensor B', 'Data cleaner X', 7 ],
+          [ 'Data cleaner X', 'Machine Learning Y', 22 ],
+          [ 'Wind Speed', 'Machine Learning Y', 6 ],
+          [ 'Room temperature', 'Report 1', 9 ],
+          [ 'Machine Learning Y', 'Report 1', 4 ],
+          [ 'Machine Learning Y', 'Report 2', 12],
+          [ 'Machine Learning Y', 'Report 3', 14],
+          [ 'Historical database C', 'Analytic Z', 12],
+          [ 'Analytic Z', 'Report 3', 19],
+          [ 'Manual input M', 'Analytic Z', 12],
+          [ 'Manual input N', 'Report 3', 12]
+        ]);
