@@ -3,9 +3,9 @@ title: Running IOTA Full Node
 date: 2018-02-19 22:29:05
 tags:
   - IOTA
-  - DTL
+  - DLT
   - Distributed Ledger Technology
-  - blockchain
+  - Blockchain
   - Fullnode
 ---
 
