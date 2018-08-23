@@ -10,8 +10,13 @@ tags:
 - Distributed Ledger Technology
 - Tangle
 ---
-# Introduction #
 
+### Edit log:###
+2018.08.23 - Updated the data schema:
+1. Added formatType field. 
+2. Specified mandatory fields and optional field. For example, Timestamp is now an optional field.
+
+# Introduction #
 If we say "Data is the new oil", then [data lineage](https://en.wikipedia.org/wiki/Data_lineage) is an issue that we must to solve. Various data sets are generated (most likely by sensors), transferred, processed, aggregated and flowed from upstream to downstream. 
 
 The goal of data lineage is to track data over its entire lifecycle, to gain a better understanding of what happens to data as it moves through the course of its life. It increases trust and acceptance of result of data process. It also helps to trace errors back to the root cause, and comply with laws and regulations.
@@ -103,24 +108,27 @@ Data stream is data package series from the same data source. It contains more t
 Data source creates a public MAM public channel by using its private seed. The private seed ensures only the the data source can publish information into that channel, and so the channel is trusted by others.
 
 ### Step B. Select a format of integrity information ###
-There are 2 formats:
-#### Lightweight Format ####
+There are 2 formats and their **mandatory** fields:
+
+Note that you can add more additional fields for fitting your logic. For example, you can add a field "timestamp" for storing the timestamp when the data was collected. But it is not mandatory, as all transactions in Tangle already has a system timestamp, listing when the data was submitted to the tangle.
+
+#### Lightweight Format (mandatory fields)####
 ```json
 {
-	timestamp: timestamp,
 	datapackageId: id,
+	formatType:"lightweight",
 	data: content-of-data-package
 }
 ```
 This lightweight format suits for small and public data stream. The data itself was stored inside of tangle, therefore it is open to everyone. For example, a weather station can use this format to publish temperatures. 
 
-#### Standard Format ####
+#### Standard Format (mandatory fields)####
 This standard format suits for either large data set which is too big to store in tangle, or the data source do not wish to store the data directly in tangle.
 ```json
 {
-	timestamp: timestamp,
 	datapackageId: id,
-	signature: hash(package-id, data content, timestamp)
+	formatType:"standard",
+	signature: hash(package-id, data content, timestamp, other fields++)
 }
 ```
 The key part of this format is, instead of store the data itself, it stores the hash(package-id, data content, timestamp) in tangle. The hash function can be one of the [Secure Hash Algorithms](https://en.wikipedia.org/wiki/Secure_Hash_Algorithms), such as SHA-512/256.
@@ -186,12 +194,15 @@ If we can store and verify this flow (data lineage of the report), it will:
 ### Solution Design ###
 On the top of the data integrity layer that we discussed above, it is easy to extend the format to build the data lineage layer. 
 
-Now we extend the formats to include an optional field **Inputs**, which is an array of MAM addresses. These addresses represent the data integrity information of all inputs of the current data package.  
+Now we extend the formats to include an optional field **inputs**, which is an array of MAM addresses. These addresses represent the data integrity information of all inputs of the current data package.  
+
+Depends on if you have any input, **inputs** is optional. You can ignore this field, or have this field but the value is null.
+
 #### Lightweight Format ####
 ```json
 {
-	timestamp: timestamp,
 	datapackageId: id,
+	formatType:"lightweight",
 	data: content-of-data-package
 	inputs: [array-of-input-addresses]
 }
@@ -202,8 +213,8 @@ This lightweight format suits for small and public data stream. The data itself 
 This standard format suits for either large data set which is too big to store in tangle, or the data source do not wish to store the data directly in tangle.
 ```json
 {
-	timestamp: timestamp,
 	datapackageId: id,
+	formatType:"standard",
 	signature: hash(package-id, data content, timestamp)
 	inputs: [array-of-input-addresses]
 }
@@ -219,5 +230,6 @@ It means that
 
 # Conclusion #  
 Data integrity and data lineage play important roles in the coming data-first era. By using DLT, especially IOTA, it is possible to build the infrastructure of them. However, we have to keep in mind, even IOTA looks promising, it is under development, and it is not production ready. We will continue our investigation and collaboration with IOTA team/communities to continue this journey. 
+
 
     
