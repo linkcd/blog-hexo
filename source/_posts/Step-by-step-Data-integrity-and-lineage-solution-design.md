@@ -31,3 +31,4 @@ In our context of **data integrity**, we would like to have a solution that fulf
 Solution evltion
 Requiremnt #2 is pretty strangt forward: Whenever Alice sends out a message, she also send out a hash value of the message. With any good hash function, such as SHA512, Bob and Carol can easily compare the hash value from Alice and the hash value they own calculated based on the received message.
 
+x
