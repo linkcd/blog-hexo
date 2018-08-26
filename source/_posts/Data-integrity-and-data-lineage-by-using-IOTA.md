@@ -12,9 +12,9 @@ tags:
 ---
 
 ### Edit log:###
-2018.08.23 - Updated the data schema:
-1. Added formatType field. 
-2. Specified mandatory fields and optional field. For example, Timestamp is now an optional field.
+2018.08.26 - Updated the data schema:
+1. Have an unified format that covers both lightweight format and standard format, but more flexible and self-explained.
+2. Specified mandatory fields and optional field in the format. For example, Timestamp is now an optional field.
 
 # Introduction #
 If we say "Data is the new oil", then [data lineage](https://en.wikipedia.org/wiki/Data_lineage) is an issue that we must to solve. Various data sets are generated (most likely by sensors), transferred, processed, aggregated and flowed from upstream to downstream. 
@@ -107,33 +107,69 @@ Data stream is data package series from the same data source. It contains more t
 ### Step A. Data source creates a MAM channel for publishing integrity information ###
 Data source creates a public MAM public channel by using its private seed. The private seed ensures only the the data source can publish information into that channel, and so the channel is trusted by others.
 
-### Step B. Select a format of integrity information ###
-There are 2 formats and their **mandatory** fields:
+### Step B. Decide your integrity information content ###
+In order to allow the consumer to verify the integrity, you need to provide enough information to make it possible. Therefore you need to decide what information should be stored in the tangle as json object.
 
-Note that you can add more additional fields for fitting your logic. For example, you can add a field "timestamp" for storing the timestamp when the data was collected. But it is not mandatory, as all transactions in Tangle already has a system timestamp, listing when the data was submitted to the tangle.
-
-#### Lightweight Format (mandatory fields)####
+#### Mandatory fields #### 
+All object must have the following core fields. All of them are **mandatory**.
 ```json
 {
-	datapackageId: id,
-	formatType:"lightweight",
-	data: content-of-data-package
+	datapackageId: string,
+	wayofProof:string,
+	valueOfProof:string
 }
 ```
-This lightweight format suits for small and public data stream. The data itself was stored inside of tangle, therefore it is open to everyone. For example, a weather station can use this format to publish temperatures. 
+| Field  | Description   | Example  |
+|---|---|---|
+| **datapackageId** | The package ID is used for querying the data lineage info from the channel. Data source decides the ID format, such as integer or GUID. Different channels can have the same package ID. |  "123456" |
+| **wayofProof** | Information about how to verify the integrity based on valueOfProof. For example, it explains the used hash algorithms (SHA1 or SHA2 or others), or it simply copied the data package content into field valueOfProof.  | "SHA256(packageId, original-data-content)"  |
+| **valueOfProof**  | The value of the proof, such as hash value, or the copy of the data content in clear text. | (hash value or data itself) |
 
-#### Standard Format (mandatory fields)####
-This standard format suits for either large data set which is too big to store in tangle, or the data source do not wish to store the data directly in tangle.
+**Case 1**
+A temperature sensor decides to use timestamp as package Id, and since the data point is small and not confidential, it decides to put the data point as clear text in the integrity information object. 
+
+Therefore, at 2012-08-29 11:38:22, the temperature is 20 degree. It sends the integrity json into its own MAM channel:
 ```json
 {
-	datapackageId: id,
-	formatType:"standard",
-	signature: hash(package-id, data content, timestamp, other fields++)
+	datapackageId: "1346236702",
+	wayofProof:"copy of original data",
+	valueOfProof:"20"
 }
 ```
-The key part of this format is, instead of store the data itself, it stores the hash(package-id, data content, timestamp) in tangle. The hash function can be one of the [Secure Hash Algorithms](https://en.wikipedia.org/wiki/Secure_Hash_Algorithms), such as SHA-512/256.
+**Case 2**
+An application generates big csv files and pass to the down stream. all csv files have an unique file name. Since we do not have do expose the csv file itself, either due to confidentiality or huge file size, it decides to use hash value in the integrity json. The hash function can be one of the [Secure Hash Algorithms](https://en.wikipedia.org/wiki/Secure_Hash_Algorithms), such as SHA-512/256. This application decide to hash the file content together with the filename.
 
-For example, a sensor owner pack all data of every 10 minutes into one json file, assign an ID to it, then compute the signature of this truck of the data.
+therefore, for file with unique name "file075.csv", the application computed the hash based on **SHA256("file075.csv"+":"+filecontent.string())**, which is "8c20f3d24...43a6cfb7c4"
+```json
+{
+	datapackageId: "file075.csv",
+	wayofProof:"SHA256("file075.csv"+":"+filecontent.string())",
+	valueOfProof:""8c20f3d24...43a6cfb7c4"
+}
+```
+
+#### Use hash for reducing calls to tangle ###
+The hash is also useful if you wanna reduce the data sent to tangle. For example, a data source is generating a small file per second. However, pushing data to tangle in every second can be a performance bottleneck. If the data source pack all files of every 10 minutes into one, assign an ID and compute the hash value of this data trunk, it can still publish integrity data into tangle but with much lower frequency.  
+
+#### Extend it with optional fields #### 
+In addition to the above mandatory fields, you can extend the json object by adding more additional fields for fitting your logic. 
+
+For example, for case 1, you can add a field "location" for storing the location of that sensor, and "sensorType" of sensor type.  These fields will be tightly coupled with these core fields, and stored in the tangle.
+```json
+{
+	datapackageId: "1346236702",
+	wayofProof:"copy of original data",
+	valueOfProof:"20",
+	location:"Oslo",
+	sensorType:"temperature sensor XY200",
+	...
+	additionalField:...
+	...
+}
+```
+
+**Note**
+"timestamp" is not a mandatory field, as all transactions in Tangle already has a system timestamp shows when the data was submitted to the tangle. You can add "timestamp" field to store when the original data was collected.
 
 ### Step C. Data source send data integrity information to the channel ###
 Data source sends data or hash value of the data to the MAM channel (IOTA tangle), it ensures:
@@ -156,14 +192,17 @@ This code simply:
 ### Step D. Data source publish information of the channel ###
 Data source publish (on web site or equivalent) the following information for anyone who wants to verify the integrity:
 1. Root address of the MAM channel (NOT the private seed!)
-2. Used format: Standard or lightweight
-3. Used hash function: SHA512 or SHA-3 or others (if it is using Standard format)
+
+
 
 ### Step E. Data consumer to verify the integrity ###
 If a data consumer would like to verify the data he/she got from the data source is not tampered, the consumer can:  
-1. Obtain the MAM channel root address of the data source, selected format (Standard or Lightweight) and selected hash algorithm if any. 
-2. If it is using Lightweight format, then simply compare the data values.
-3. If it is using Standard format, then data consumer follows the hash algorithm to re-compute the hash of the data package he/she got, then compare it with the hash value from the MAM channel.
+1. Obtain the MAM channel root address of the data source
+2. read the "wayOfProof" to understand how to check the "valueOfProof" field. 
+For example:
+	- if "wayOfProof" is "copy of original data", then simply compare the value from tangle and value from received package.
+	- if "wayOfProof" is "SHA256("file075.csv"+":"+filecontent.string())", the perform the same hash locally, the compare the result with the value from "valueOfProof"
+
 
 ## Overview of data integrity workflow ##
 {% asset_img "Workflow.png" "Click to enlarge the workflow of data integrity" %}
@@ -194,32 +233,22 @@ If we can store and verify this flow (data lineage of the report), it will:
 ### Solution Design ###
 On the top of the data integrity layer that we discussed above, it is easy to extend the format to build the data lineage layer. 
 
-Now we extend the formats to include an optional field **inputs**, which is an array of MAM addresses. These addresses represent the data integrity information of all inputs of the current data package.  
+Now we extend the format to include an optional field **inputs**, which is an array of MAM addresses. These addresses represent the data integrity information of all inputs of the current data package.  
 
 Depends on if you have any input, **inputs** is optional. You can ignore this field, or have this field but the value is null.
 
-#### Lightweight Format ####
+#### Extent the format to include inputs ####
 ```json
 {
-	datapackageId: id,
-	formatType:"lightweight",
-	data: content-of-data-package
-	inputs: [array-of-input-addresses]
+	datapackageId: string,
+	wayofProof:string,
+	valueOfProof:string,
+	inputs: [array-of-input-addresses],
+	...
+	additionalField:...
+	...
 }
 ```
-This lightweight format suits for small and public data stream. The data itself was stored inside of tangle, therefore it is open to everyone. For example, a weather station can use this format to publish temperatures. 
-
-#### Standard Format ####
-This standard format suits for either large data set which is too big to store in tangle, or the data source do not wish to store the data directly in tangle.
-```json
-{
-	datapackageId: id,
-	formatType:"standard",
-	signature: hash(package-id, data content, timestamp)
-	inputs: [array-of-input-addresses]
-}
-```
-
 By using the additional **inputs** field, it is easy to establish the follow data lineage flow:
 {% asset_img "Data lineage flow.png" "Click to enlarge the data lineage flow" %}
 
