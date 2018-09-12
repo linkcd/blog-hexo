@@ -1,5 +1,5 @@
 ---
-title: 'Step by step: Data lineage solution design'
+title: 'Data Integrity and Lineage by using DLT, Part 1'
 date: 2018-09-02 20:33:49
 tags:
 - IOTA
@@ -10,10 +10,19 @@ tags:
 - Distributed Ledger Technology
 - Tangle
 ---
-# Introduction #
-Veracity is designed to help companies unlock, qualify, combine and prepare data for analytics and benchmarking. The data is from all type of sources, such as sensor and edge devices, production systems, historical databases and and human inputs. Data is generated, transferred, processed and stored, from one system to another system, one company to another company.
+Author: [Feng Lu](https://www.linkedin.com/in/linkcd), Lead Architect of Veracity
 
-Given the complicity of the entire life-cycle of the data, both [data integrity](https://en.wikipedia.org/wiki/Data_integrity) and [data lineage](https://en.wikipedia.org/wiki/Data_lineage) are key issues that we must address. Both Data integrity and data lineage form the foundation of trust.
+# Introduction #
+Veracity is designed to help companies unlock, qualify, combine and prepare data for analytics and benchmarking. It helps data providers to easily onboard data into the platform, and enable data consumers to access and explore the value. The data is from all type of sources, such as sensor and edge devices, production systems, historical databases and  human inputs. Data is generated, transferred, processed and stored, from one system to another system, one company to another company. 
+
+Even Veracity and DNV GL has a strong brand and more than 150 years history for been a trusted 3rd party, it is still pretty common to hear questions from data consumers such as:
+1. Can I trust this data that I got from Veracity? 
+2. How was the data collected and processed?
+
+{% asset_img "Blackbox in data platform.png" "" %}
+
+In order to answer these questions and bring more transparency to the data process lifecycle, we must address both [data integrity](https://en.wikipedia.org/wiki/Data_integrity) and [data lineage](https://en.wikipedia.org/wiki/Data_lineage). Both Data integrity and data lineage form the foundation of trust.
+
 {% asset_img "Data integrity lineage and trust.png" "Data lineage is built on top of data integrity" %}
 
 In this series of articles, we are going to look at different challenges and evolve the solution.  
@@ -44,7 +53,7 @@ In iteration 1 we focus on solving requirement #1: *The messages were not tamper
 - **Pro**: Does not require key management for both Alice and Bob.
 - **Con**: With hashing, it requires an additional data flow for passing hash values from Alice to Bob. It actually requires the same security mechanism as the normal data flow. 
 
-We can address the Con by introducing a trusted area for Alice. For example, Alice also publish the hash values of the messages on https://alice.com. Bob can verify the message by compare the hash values. It is also OK to make the trusted area public, as  hash value is irreversible - nobody can obtain the data by using the hash value, they can only check the message integrity. 
+We can address the Con by introducing a trusted area for Alice. For example, Alice also publish the hash values of the messages on https://alice.com. Bob can verify the message by compare the hash values. It is also OK to make the trusted area public, as hash value is irreversible - nobody can obtain the data by using the hash value, they can only check the message integrity. 
 
 This solution is sort of adding a secured "safeguard" track on the side, to help verifying the data flowing in the insecure channel. 
 
@@ -55,7 +64,7 @@ This solution is sort of adding a secured "safeguard" track on the side, to help
 In iteration #2, in additional to requirement #1, we also need to also fulfill requirement #2:  *The messages that Bob received, are indeed from Alice.*
 
 #### 2.1 Using Encryption (with Asymmetric key)  
-This normally requires asymmetric encryption: Alice encrypts the message with her private key, and Bob decrypts it with Alice's public key.  Therefore Bob is confident that Alice is the message author. 
+This normally requires asymmetric encryption: Alice encrypts the message with her private key, and Bob decrypts it with Alice's public key.  Therefore, Bob is confident that Alice is the message author. 
 {% asset_img "Sending msg with asymmetric encryption.png" "Sending msg with asymmetric encryption" %}
 
 #### 2.2 Using Hashing (with a trusted area), same as iteration #1
@@ -92,13 +101,13 @@ As the data is replicated in all nodes in the DLT network, it means that the dat
 - Decentralized
 The ledger network is decentralized, means all participators have the same copy of the data, including Alice and Bob, for example.  
 - Built-in authentication  
-In order to send data to the ledger, the author has to use his/her private key. It provides the built-in authentication for identifying who is the author of that data/transaction. 
+In order to send data to the ledger, the author must use his/her private key. It provides the built-in authentication for identifying who is the author of that data/transaction. 
  
 #### 3.1 Encrypted message within DLT
-As DLT does support built-authentication, it is not need for use asymmetric(public/private) key for identity purpose. You can still use symmetric key for protecting the message from unauthorized access.  
+As DLT does support built-authentication, it is no need for use asymmetric(public/private) key for identity purpose. You can still use symmetric key for protecting the message from unauthorized access.  
 However, there are some limitations for using DLT as the secured channel. The biggest one is the size limitation of the message. For example, bitcoin size limitation is 1 MB and ethereum is about similar size. For lots of the cases, this limitation is show-stopper.
 
-Therefor, the hashing solution with DLT is more realizable. See below.
+Therefore, the hashing solution with DLT is more realizable. See below.
 
 #### 3.2 Hashing with DLT
 {% asset_img "Hashing solution with dlt.png" "Hashing solution with dlt" %} 
@@ -111,7 +120,7 @@ It means:
 	1. Find the transaction that contains the hash value for that message from DLT
 	2. By check the transaction's metadata, Bob can check the author and timestampe.
 	3. By check the hash value from that transaction, Bob can verify the message content is not tampered.
-4. Also, it is impossible for Alice wanna replace a old hash value. So Bob is protected from an immutable history. 
+4. Also, it is impossible for Alice want to replace an old hash value. So Bob is protected from an immutable history. 
 
 # Data Lineage
 
@@ -125,8 +134,38 @@ For example, Bob is running a data process. This process takes inputs from Alice
 
 For Carol, some typical questions are:
 1. What inputs Bob used for producing the results #X and #Y?
-2. Do these inputs also have another inputs? If yes, what are they?
+2. Do these inputs also have another input? If yes, what are they?
 3. Is there a way to have to full picture of the whole data process lifecycle, without asking Bob (and every upstream) in the supply chain? 
 
 
-Also for Bob, 
+#### Data Lineage with DLT
+Now we continue building on top of the Hashing solution with DLT. Whenever a data provider (for example, Bob) sends out data, he writes into DLT that contains:
+1. Hash value, which will be used for data integrity verification (same as before), and
+2. If the data has inputs, the reference to the input are also stored into DLT 
+
+{% asset_img "Data lineage by using DLT.png" "" %}
+
+It means that the DLT contains the end-to-end data lifecycle information. Carol (and anyone else) only need to query the public information from DLT to build the lineage diagram.
+
+With this solution, Carol can:
+1. Gain the knowledge that that Bob is using data from Alice as inputs, without asking Bob. 
+2. Verify the data integrity for both Alice and Bob, even Carol does not directly consume the data from Alice.
+3. Data integrity and data lineage information is immutable.
+
+{% asset_img "Extract lineage from DLT.png" "" %}
+
+#### Extra protection for data processor
+In above process, Bob is a data processor that accepts inputs from Alice (upstream), process it and send results to Carol (downstream). 
+
+This solution also provides an extra protection for Bob. For example, if Bob sent a data to Carol based on an incorrect input from Alice, Bob can simply explain that the root cause of the error is not on him but Alice, and Alice cannot deny that.
+
+{% asset_img "Track down the root cause.png" "" %}
+
+This also means this solution can greatly simplifying the ability to trace errors back to the root cause, even the whole process includes different parties/organizations. 
+
+# Conclusion
+Now we have went through different requirements and evolved solutions accordingly. At the end we believe the hashing solution with DLT can solve both data integrity and data lineage challenges. If the eco-system (data source, data processors and platform) can follows the same design, it will significantly increase the trust of data consumers as well as build more value into the data.
+
+{% asset_img "No longer a blackbox on veracity.png" "" %}
+
+In the next article, we will look at this solution in action, by using IOTA as the selected DLT.
