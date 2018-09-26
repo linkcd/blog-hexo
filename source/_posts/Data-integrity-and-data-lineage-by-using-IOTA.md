@@ -3,7 +3,7 @@ title: Data Integrity and Lineage by using IOTA
 date: 2018-04-16 11:22:13
 tags:
 - IOTA
-- Data Linage
+- Data Lineage
 - Data Integrity
 - IoT
 - DLT
