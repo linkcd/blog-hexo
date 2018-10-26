@@ -11,81 +11,77 @@ tags:
 - Tangle
 ---
 
-# Introduction #
+In previous article, we have discussed different approaches for solving the data integrity and lineage challenges, and concluded that the "**Hashing with DLT**" solution is the direction we will move forward. In this article, we will have deep dive into it.
 
+## Which DLT to select?
+There are many available DLT platforms nowadays, but not all of them are suitable for Big Data or IoT scenarios, such as:
+1. We are tracking logical data entities (bits, files or data streams) instead of physical entities (coal, car parts or packages).
+2. The granularity of data has much more detailed scale in IoT and Big Data world. One example is, tracking every single piece of coal from a carrier ship sounds crazy, but tracking every data signal from thousands sensors from the very same ship is quite common. 
+2. We need to use DLT to handle large volume of transactions within a short time period (e.g. send 1000 data points from one device to another device per minute) 
+3. We need to use DLT to store large amount of data (e.g. data integrity information of thousands of sensors)
+4. Cannot afford high transaction fee
 
-## Data lineage challenges ##
-Some top challenges are:
-- We are tracking logical entities (bits, files or data streams) instead of physical entities (coal, car parts or packages). 
-- The granularity of data has much more detailed scale in IoT and Big Data world. One example is, tracking every single piece of coal from a carrier ship sounds crazy, but tracking every data signal from thousands sensors from the very same ship is quite common. 
-- Also, protecting logical entities is even harder in the cyberspace, both in data transportation and storage.
-
- 
-## Technologies ##
-[Distributed Ledger Technology](https://en.wikipedia.org/wiki/Distributed_ledger) (DLT) shows its potential capacity to become the neutral and trustworthy 3rd party in data lineage world, as it has the following key features:
-- Data Immutable 
-- Decentralized 
-
-But not all DLT are suitable for Big Data or IoT scenarios, when we have, for example, following requirements:
-1. Need to use DLT to store large amount of data (e.g. data integrity information of thousands of sensors)
-2. Need to use DLT to handle large volume of transactions within a short time period (e.g. send 1000 data points from one device to another device per minute) 
-3. Cannot afford high transaction fee
-
-Therefore, IOTA becomes an outstanding DTL compares to other blockchain platform, by offering the following features:
-1. Data Integrity/Security: All data cryptographically secured in a Tangle. This data can be made visible to certain parties.
+## IOTA - the selected DTL for exploring 
+Therefore, [IOTA](https://www.iota.org) becomes an outstanding DTL compares to other platforms, by offering the following key features:
+1. Higher performance and scalability: Thanks to tangle data structure
 2. Zero Transaction Fee: Machine to Machine micropayments. This way machines can pay each other for certain services and resources.
-3. Full scalability: Thanks to tangle data structure 
-
-*This is not an article of introducing IOTA, but you can learn more from https://www.iota.org/ and https://blog.iota.org and IOTA channel in Discord.*
-
-But most importantly, it brings Masked Authenticated Messaging (MAM) which fits into our need for data integrity and data lineage.
-
-### Masked Authenticated Messaging (MAM) ###
-Masked Authenticated Messaging (MAM) was introduced by IOTA in Nov 2017. The high level description can be found at [here](https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e).
-Besides, some deep dive information of Tangle transaction and MAM can be found at:
-- [IOTA: MAM Eloquently Explained](https://medium.com/@abmushi/iota-mam-eloquently-explained-d7505863b413)
-- [IOTA blogs by Louie Lu](https://blog.louie.lu/category/crypto/iota/) (in Chinese)
-- [IOTA research group](https://hackmd.io/c/rkpoORY4W/%2Fs%2Fr1r3gowFf) (in Chinese)
-- Javascript lib of MAM: https://github.com/iotaledger/mam.client.js 
-- [MAM deep dive (youtube)](https://www.youtube.com/watch?v=Nnwn_o_ZBFU)
 
 
-# Solution Deep Dive # 
+*This is not an article of introducing IOTA, but you can learn more from https://www.iota.org*
 
-## Design principles ##
-### 1. Data integrity is the foundation of data lineage ###
-Data Integrity is the prerequisite of Data Lineage, and they can be addressed separately. 
-{% asset_img "Data integrity lineage and trust.png" "Data lineage is built on top of data integrity" %}
+In addition, it provides a protocol named [Masked Authenticated Messaging (MAM)](https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e) that easily fit into our solution. 
+1. One person or application creates a private seed (such as private key). The seed shall not be shared with others.
+2. One seed can create one unique MAM channel in IOTA tangle, then write messages into it.
+3. The messages contain data such as json objects.
+4. The private seed ensures that only the seed owner is authorized to write messages in the channel. Therefore the origin of the messages is trusted by others.
+5. Once the message was written into channel, the message is replicated and stored in all nodes in DLT. It means the message is immutable.
+6. The message can be fetched from MAM by using the MAM address.
+7. Once you know a MAM address in the channel, you can go through all addresses (and fetch their messages) that follows the known address.  
 
-### 2. Self-service verification process###
+Therefore, Alice can publish the hash values like the following diagram 
+{% asset_img "Hashing with MAM channel.png" "" %}
+
+### Sample code for sending MAM message to channel 
+There is a sample code for sending message into IOTA tangle at https://github.com/linkcd/IOTAPoC/blob/master/tangleWriter.js from [my repository](https://github.com/linkcd/IOTAPoC).
+
+This code simply:
+1. Generates a random seed and create a public MAM channel
+2. Accepts inputs from keyboard and send it to tangle as json format
+3. Once the message was sent do tangle, anyone can query the tangle and read it from the public channel. But none can change it since it is immutable. You can read the MAM message by using a good tool https://thetangle.org/mam.
+
+{% asset_img "MAM sample code.png" "Sample code for sending message to IOTA tangle" %}
+
+
+# Design principles and conceptual entities
+First, lets agree some design principles and conceptual entities
+## 1. Self-service verification process
 The verification process of both data integrity and data lineage should be self-service. It means that all verification information should be available to public. Data provider should not be bothered by this process. 
 *(Technically it is possible to have permission control of the verification process, it means that data provider has to response to the ad-hoc verification requests)*
 
-### 3. Data lineage verification is an add-on on the side of the main data-flow ###
+## 2. Data lineage verification is an add-on on the side of the main data-flow 
 It means that data lineage will not impact the existing data flow, nor become bottleneck. 
 
-
-## Conceptual Entities ##
-### Data Source ###
+## 3. Conceptual entities
+### 3.1 Data Source 
 - A sensor, person, application that generates data package (s)
 - Has 0 or more inputs (upstream data source)
 - Has 1 or more outputs (downstream data source)
 - A company can have more than one data sources
 
-### Data Package ###
+### 3.2 Data Package 
 An atomic unit in data flow from one data source to another data source. For example:
 - A data point (23 degree at 10:30am), or
 - A file (json, xml)
 - Files (1.json, 2.json…10.json…)
 - Data rows in a database (row #1 to row #10 in table “employee”)
 
-### Data Package Id ###
+### 3.3 Data Package Id 
 The unique ID of a data package in the scope of a data source. A typical data package id is a number, a GUID or a time-stamp.
 
-### Data Stream ###
+### 3.4 Data Stream 
 Data stream is data package series from the same data source. It contains more than more packages and their IDs.
 
-## Solution Part 1: Data Integrity ##
+# Solution Part 1: Data Integrity
 **Goal: One can verify the integrity of data packages from a data source.**
 
 ### Step A. Data source creates a MAM channel for publishing integrity information ###
@@ -162,15 +158,8 @@ Data source sends data or hash value of the data to the MAM channel (IOTA tangle
 3. Performance is acceptable (assuming IOTA can handle large volume of data from devices)
 4. No extra cost due to zero transaction fee
 
-#### Demo code of sending MAM message to channel ####
-You can have a look at the sample code of sending message into IOTA tangle at https://github.com/linkcd/IOTAPoC/blob/master/tangleWriter.js from [my repository](https://github.com/linkcd/IOTAPoC).
 
-This code simply:
-1. Generate a random seed and create a public MAM channel
-2. Accept inputs from keyboard and send it to tangle as json format
-3. Once the message was sent do tangle, everyone can query the tangle and read it. But none can change it since it is immutable. You can read the MAM message by using a good tool https://iota-mam-explorer.now.sh/.
 
-{% asset_img "MAM sample code.png" "Sample code for sending message to IOTA tangle" %}
 
 
 ### Step D. Data source publish information of the channel ###
@@ -245,4 +234,12 @@ It means that
 Data integrity and data lineage play important roles in the coming data-first era. By using DLT, especially IOTA, it is possible to build the infrastructure of them. However, we have to keep in mind, even IOTA looks promising, it is under development, and it is not production ready. We will continue our investigation and collaboration with IOTA team/communities to continue this journey. 
 
 
-    
+# resources #
+### Masked Authenticated Messaging (MAM) ###
+Masked Authenticated Messaging (MAM) was introduced by IOTA in Nov 2017. The high level description can be found at [here](https://blog.iota.org/introducing-masked-authenticated-messaging-e55c1822d50e).
+Besides, some deep dive information of Tangle transaction and MAM can be found at:
+- [IOTA: MAM Eloquently Explained](https://medium.com/@abmushi/iota-mam-eloquently-explained-d7505863b413)
+- [IOTA blogs by Louie Lu](https://blog.louie.lu/category/crypto/iota/) (in Chinese)
+- [IOTA research group](https://hackmd.io/c/rkpoORY4W/%2Fs%2Fr1r3gowFf) (in Chinese)
+- Javascript lib of MAM: https://github.com/iotaledger/mam.client.js 
+- [MAM deep dive (youtube)](https://www.youtube.com/watch?v=Nnwn_o_ZBFU)
