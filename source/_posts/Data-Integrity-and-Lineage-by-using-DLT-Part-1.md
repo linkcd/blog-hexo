@@ -12,8 +12,12 @@ tags:
 ---
 (*Originally published at [Veracity Blog](https://developer.veracity.com/blog/data-integrity-and-lineage-by-using-dlt-part-1)*)
 
-# Introduction #
+**Other articles in this series:**
+- Part 1 (this article)
+- Part 2 
+- Part 3
 
+# Introduction #
 With the proliferation of data – collecting and storing it, sharing it, mining it for gains – a basic question goes unanswered: is this data even good? The quality of data is of utmost concern because you can't do meaningful analysis on data which you can't trust. Here in Veracity, we are trying to address this is very concern. This is a 3 part series, going all the way from concept to a working implementation using DLT (Distributed Ledger Technology).
 
 Side note, Veracity is designed to help companies unlock, qualify, combine and prepare data for analytics and benchmarking. It helps data providers to easily onboard data to the platform, and enable data consumers to access and mine value. The data can be from various sources, such as sensors and edge devices, production systems, historical databases and human inputs. Data is generated, transferred, processed and stored, from one system to another system, one company to another company. 
@@ -174,3 +178,8 @@ Now we have went through different requirements and evolved solutions accordingl
 {% asset_img "No longer a blackbox on veracity.png" "" %}
 
 In the next article, we will look at this solution in action, by using IOTA as the selected DLT.
+
+**Other articles in this series:**
+- Part 1 (this article)
+- Part 2 
+- Part 3
