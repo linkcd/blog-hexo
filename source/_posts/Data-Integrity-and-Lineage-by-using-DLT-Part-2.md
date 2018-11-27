@@ -11,10 +11,19 @@ tags:
 - Tangle
 ---
 
-In my previous article, we discussed different approaches for solving the data integrity and lineage challenges, and concluded that the "**Hashing with DLT**" solution is the direction we will move forward. In this article, we will have deep dive into it.
+(*Also published at [Veracity Blog](https://developer.veracity.com/blog/data-integrity-and-lineage-by-using-dlt-part-2)*)
+
+**Other articles in this series:**
+- [Part 1](http://feng.lu/2018/09/25/Data-Integrity-and-Lineage-by-using-DLT-Part-1/)
+- Part 2 (this article)
+- Part 3
+
+In my previous article, we discussed different approaches for solving the data integrity and lineage challenges, and concluded that the "**Hashing with DLT**" solution is the direction we will move forward. In this article, we will have deep dive into it. Please not that Veracity’s work on data integrity and data lineage is testing many technologies in parallel. We utilise and test proven centralized technologies as well as new distributed ledger technologies like Tangle and Blockchain. This article series uses the IOTA Tangle as the distributed ledger technology. The use cases described can be solved with other technologies. This article does not necessarily reflect the technologies used in Veracity production environments.
 
 # Which DLT to select?
 As Veracity is part of an Open Industry Ecosystem we have focused our data integrity and data lineage work using public DLT and open sourced technologies. We believe that to succeed with providing transparency from the user to the origin of data many technology vendors must collaborate around common standards and technologies. The organizational setup and philosophies for some of the public distributed ledgers provides the right environment to learn and develop fast with an adaptive ecosystem. 
+
+<!-- more -->
 
 There are many public DLT platforms nowadays, but not all of them (such as Bitcoin and Ethereum) are suitable for Big Data or IoT scenarios, such as:
 1. We are tracking logical data entities (bits, files or data streams) instead of physical entities (coal, car parts or packages).
@@ -26,7 +35,7 @@ There are many public DLT platforms nowadays, but not all of them (such as Bitco
 ## IOTA - the selected DTL for exploring 
 We have been watching closely at the technology evolution of distributed ledgers and exploring different possibilities. Currently we are exploring [IOTA](https://www.iota.org), which is a new type of DLT that foundationally different from other blockchain-based technologies.  The high-level comparison can be found at [IOTA FAQs](https://www.iota.org/get-started/faqs), question “How is IOTA different from Blockchain?” 
 We decide to test our solution on top of IOTA, due to the following key features that IOTA offers:
-1. Higher performance and scalability: Thanks to tangle data structure.
+1. Promise of higher performance and scalability: Thanks to tangle data structure.
 2. Zero Transaction Fee: Machine to Machine micropayments. This way machines can pay each other for certain services and resources.
 
 *This is not an article of introducing IOTA, but you can learn more from https://www.iota.org*
@@ -293,3 +302,8 @@ Masked Authenticated Messaging (MAM) was introduced by IOTA in Nov 2017. The hig
 - [IOTA: MAM Eloquently Explained](https://medium.com/@abmushi/iota-mam-eloquently-explained-d7505863b413)
 - Javascript lib of MAM: https://github.com/iotaledger/mam.client.js 
 - [MAM deep dive (youtube)](https://www.youtube.com/watch?v=Nnwn_o_ZBFU)
+
+**Other articles in this series:**
+- [Part 1](http://feng.lu/2018/09/25/Data-Integrity-and-Lineage-by-using-DLT-Part-1/)
+- Part 2 (this article)
+- Part 3
