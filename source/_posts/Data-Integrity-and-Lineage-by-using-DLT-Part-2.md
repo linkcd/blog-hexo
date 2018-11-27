@@ -23,6 +23,8 @@ In my previous article, we discussed different approaches for solving the data i
 # Which DLT to select?
 As Veracity is part of an Open Industry Ecosystem we have focused our data integrity and data lineage work using public DLT and open sourced technologies. We believe that to succeed with providing transparency from the user to the origin of data many technology vendors must collaborate around common standards and technologies. The organizational setup and philosophies for some of the public distributed ledgers provides the right environment to learn and develop fast with an adaptive ecosystem. 
 
+{% asset_img "title.jpg" "" %}
+
 <!-- more -->
 
 There are many public DLT platforms nowadays, but not all of them (such as Bitcoin and Ethereum) are suitable for Big Data or IoT scenarios, such as:
