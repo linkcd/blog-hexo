@@ -12,6 +12,9 @@ tags:
 ---
 
 ### Edit log:###
+2018.09.25
+This article is now expanded to an article series, where we have more detailed discussion and open-source code, [check them out!](http://feng.lu/2018/09/25/Data-Integrity-and-Lineage-by-using-DLT-Part-1/)  
+
 2018.08.26 - Updated the data schema:
 1. Have an unified format that covers both lightweight format and standard format, but more flexible and self-explained.
 2. Specified mandatory fields and optional field in the format. For example, Timestamp is now an optional field.
