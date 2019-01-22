@@ -43,7 +43,7 @@ As a live environment, it allows anyone to:
 - Submit and receive integrity/lineage information with the live IOTA tangle mainnet, without maintain his/her own infrastructure.
 - Outsource Proof-of-work (PoW) from clients to the service. Our host environment is taking care of the PoW on the server side. It helps IoT devices with low computing power (such as Raspberry PI) to submit information to DLT without consuming local resource. This also helps to improve the submission throughput (Number of submission per second). 
 - All functions can be done via either web browser or restful APIs.
-- Zero cost for testing and building Proof-of-Concept applications with real-world DLT. 
+- **Zero cost** for testing and building Proof-of-Concept applications with real-world DLT. 
 
 ### Source code
 https://github.com/veracity/data-lineage-service
