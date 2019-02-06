@@ -39,7 +39,7 @@ Use postman application to generate OAuth 2.0 token (Authorization Code Flow). T
 
 Login to generate token
  {% asset_img "Login.png" "Login to generate token" %}
- 
+
 
 ## 3. Get user id from linkedin
 In order to post articles in LinkedIn via API, we need to provide the user id. 
@@ -65,7 +65,7 @@ POST to https://api.linkedin.com/v2/shares with body:
                 "entityLocation": "http://feng.lu/archives/",
                 "thumbnails": [
                     {
-                        "resolvedUrl": "https://letussleep.files.wordpress.com/2013/05/archives_fotolia_27307847_c2a9-christophe-fouquin-fotolia-com_.jpg"
+                        "resolvedUrl": "http://feng.lu/2019/02/06/Customize-social-sharing-on-Linkedin-via-API/archives.jpg"
                     }
                 ]
             }
@@ -75,7 +75,7 @@ POST to https://api.linkedin.com/v2/shares with body:
     "distribution": {
         "linkedInDistributionTarget": {}
     },
-    "owner": "urn:li:person:MY-LINKEDIN-ID",
+    "owner": "urn:li:person:MY_LINKEDIN_ID",
     "text": {
         "text": "Checkout my blog archives! Hopefully you will find it useful. :)"
     }
