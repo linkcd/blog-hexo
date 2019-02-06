@@ -52,8 +52,19 @@ https://github.com/veracity/data-lineage-service
 https://datalineage-viewer.azurewebsites.net
 This live environment is backed by our dedicated infrastructure (IOTA node). We hope to provide more stable connection to IOTA mainnet, but there is no service level agreement yet.
 
-# Closer look at 
+# Real world demo - real-time data integrity on IoT device
+By using this service, an IoT device can ensure the integrity of its IoT data stream. As a demo, I have a raspberry pi with [sense hat](https://www.raspberrypi.org/products/sense-hat/) that is reporting temperature as well as saving the integrity information to DLT. The integrity information can be read at [here](https://thetangle.org/mam/UZFQPIFSPRNEXLGYLKQIFUZNZWLSQCUWBFHRWLBJDKIANJLKRMEYAMEPFEFHQBTENPSLPQBKKCVGYLMUN) from DLT. 
+{% youtube uL5f_d1Np20 %}
+Therefore, the data consumer of this temperature sensor can be confident that:
+- the temperature report (and the report timestamp) is not tampered  
+- it is indeed from *this* raspberry pi 
+- this data integrity information can be included into the downstream data lineage
 
+The source code of this demo is at https://github.com/linkcd/data-integrity-on-pi
+
+
+# Closer look at 
+g
 # Demo and source code
 
 # Performance test result
