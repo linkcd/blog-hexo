@@ -1,5 +1,5 @@
 ---
-title: Jump-start Kubernetes with Docker Desktop on Windows 10
+title: Jump-start Kubernetes and Istio with Docker Desktop on Windows 10
 date: 2019-10-05 19:57:31
 tags:
 - Docker
