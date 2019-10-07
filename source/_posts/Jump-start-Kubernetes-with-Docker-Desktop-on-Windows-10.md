@@ -13,8 +13,12 @@ Here we will setup a single-node Kubernetes cluster on a windows 10 PC (In my ca
 We are going to setup:
 - A single-node Kubernetes cluster
 - [Kubernetes dashboard](https://github.com/kubernetes/dashboard)
-- Install Helm
-- Isito (service mesh)
+- Helm
+- Isito (service mesh, including Kiali)
+
+{% asset_img "Title picture.png" "" %}
+
+<!-- more -->
 
 # 1. Enable Kubernetes in Docker Desktop
 [Docker Desktop (or Docker for Windows)](https://docs.docker.com/docker-for-windows/) is a nice environment for developers on Windows. The community stable version of Docker Desktop is good enough for this jump-start, just make sure the version you installed include Kubernetes 1.14.x or higher. (I am using Docker Desktop Community 2.1.0.3).
