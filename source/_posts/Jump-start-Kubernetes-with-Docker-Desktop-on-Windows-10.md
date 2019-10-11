@@ -15,6 +15,7 @@ We are going to setup:
 - [Kubernetes dashboard](https://github.com/kubernetes/dashboard)
 - Helm
 - Isito (service mesh, including Kiali)
+- Deployment samples
 
 {% asset_img "Title picture.png" "" %}
 
@@ -355,7 +356,128 @@ Go to http://localhost/productpage to verify you can open the page. You can refr
 Assuming the 20001 port forwarding is still running, then you can visualize the service relationship in Kiali http://localhost:20001/
 {% asset_img "Kiali graph.gif" "Kiali graph" %}
 
-# 5. Summary
+
+# 5. Deployment examples
+Let's deploy a single-container-application (Grafana) to the cluster, which is described at https://grafana.com/docs/installation/docker/
+
+**1. Docker version**
+```bash
+ docker run -d -p 3000:3000 grafana/grafana
+```
+
+**2. Kubernetes kubectl command version**
+```bash
+# 1. Deployment
+PS C:\> kubectl run grafana-test --generator=run-pod/v1 --image=grafana/grafana --port=3000
+#Output:
+pod/grafana-test created
+
+# 2. Check the name of the grafana pod. Note it is sitting in "default" namespace
+PS C:\> kubectl -n default get pod
+#Output:
+NAME                                  READY   STATUS    RESTARTS   AGE
+details-v1-c5b5f496d-sgr6w            2/2     Running   0          29h
+grafana-test                          2/2     Running   0          97s
+kubernetes-bootcamp-b94cb9bff-vsprh   2/2     Running   0          3h6m
+productpage-v1-c7765c886-6cpr9        2/2     Running   0          29h
+ratings-v1-f745cf57b-87m7q            2/2     Running   0          29h
+reviews-v1-75b979578c-vmzn2           2/2     Running   0          29h
+reviews-v2-597bf96c8f-plml7           2/2     Running   0          29h
+reviews-v3-54c6c64795-x67ss           2/2     Running   0          29h
+
+# 4. Enable port forwarding.
+# In case you wanna use select as the pod name contains random string, 
+# Use "kubectl -n default port-forward $(kubectl -n default get pod -l run=grafana-test -o jsonpath='{.items[0].metadata.name}') 3000:3000"
+PS C:\> kubectl -n default port-forward grafana-test 3000:3000
+#Output:
+Forwarding from 127.0.0.1:3000 -> 3000
+Forwarding from [::1]:3000 -> 3000
+```
+**3. Kubernetes YAML deployment version**
+It is recommended to use YAML file for defining a deployment. See doc at https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+Create a deployment grafana-deployment.yaml file as below:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-yaml-deployment
+  labels:
+    app: grafana-yaml
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana-yaml
+  template:
+    metadata:
+      labels:
+        app: grafana-yaml
+    spec:
+      containers:
+      - name: grafana-yaml
+        image: grafana/grafana
+        ports:
+        - containerPort: 3000
+```
+Then apply the yaml file and run
+```bash
+#1. Deployment
+PS C:\> kubectl apply -f .\grafana-deployment.yaml
+#Output:
+deployment.apps/grafana-yaml-deployment created
+
+#2. Verify
+PS C:\> kubectl get deployments
+#Output:
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+details-v1                1/1     1            1           29h
+grafana-yaml-deployment   1/1     1            1           40s
+kubernetes-bootcamp       1/1     1            1           3h27m
+productpage-v1            1/1     1            1           29h
+ratings-v1                1/1     1            1           29h
+reviews-v1                1/1     1            1           29h
+reviews-v2                1/1     1            1           29h
+reviews-v3                1/1     1            1           29h
+
+#3. Enable forward port, by using selector app=grafana-yaml
+PS C:\> kubectl -n default port-forward $(kubectl -n default get pod -l app=grafana-yaml -o jsonpath='{.items[0].metadata.name}') 3000:3000
+
+#4. Expose the service via nodeport
+PS C:\> kubectl expose deployment grafana-yaml-deployment --type=NodePort --port=3000
+#Output:
+service/grafana-yaml-deployment exposed
+
+#5. Get the external ip and port
+PS C:\> kubectl get services
+#Output:
+NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+details                   ClusterIP   10.110.165.24   <none>        9080/TCP         3d8h
+grafana-yaml-deployment   NodePort    10.98.52.86     <none>        3000:30857/TCP   9s
+kubernetes                ClusterIP   10.96.0.1       <none>        443/TCP          3d15h
+productpage               ClusterIP   10.97.123.119   <none>        9080/TCP         3d8h
+ratings                   ClusterIP   10.111.216.40   <none>        9080/TCP         3d8h
+reviews                   ClusterIP   10.109.244.28   <none>        9080/TCP         3d8h
+
+PS C:\> kubectl describe service grafana-yaml-deployment
+Name:                     grafana-yaml-deployment
+Namespace:                default
+Labels:                   app=grafana-yaml
+Annotations:              <none>
+Selector:                 app=grafana-yaml
+Type:                     NodePort
+IP:                       10.98.52.86
+LoadBalancer Ingress:     localhost
+Port:                     <unset>  3000/TCP
+TargetPort:               3000/TCP
+NodePort:                 <unset>  30857/TCP
+Endpoints:                10.1.0.208:3000
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+Then you can access grafana pod via http://localhost:30857
+
+# 6. Summary
 Now, you should have a kubernetes environment up and running, together with Istio and Kiali enabled. It can be used as your sandbox, for developing and testing your applications in Kubernetes. With Istio and Kiali, you can also play with service mesh. Everything is running locally in "one box", so you do not need to worry about any cloud running cost.
 
 Have fun.
