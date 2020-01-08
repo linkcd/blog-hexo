@@ -37,7 +37,7 @@ Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.3", GitCom
 Unable to connect to the server: dial tcp [::1]:8080: connectex: No connection could be made because the target machine actively refused it.
 ```
 
-This is because I am missing an environment variable "**KUBECONFIG**". Set this variable to your user directory such as "**C:\Users\USERNAME\.kube\config**". 
+This is because I am missing an environment variable "**KUBECONFIG**". Set this variable to your user directory such as "**C:\Users\YOUR__USER_NAME\\.kube\config**". 
 
 After adding this and restart your powershell, it should work.
 ```bash

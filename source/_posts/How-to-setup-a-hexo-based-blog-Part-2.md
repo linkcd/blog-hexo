@@ -80,19 +80,14 @@ git submodule update
 ```
 
 # Restore your blog in a new PC #
-1. Restore source code from Github
+1. Restore source code from Github and install hexo 
 	```bash
 	git clone https://github.com/linkcd/blog-hexo.git
 	cd blog-hexo
 	git submodule update --init
+	npm install hexo --save
 	```
 	{% asset_img "Restore-blog.png" "Restore blog" %}
-2. Re-install hexo program.
-	There is no need to re-install plug-ins.
-	```bash
-	cd blog-hexo
-	npm install hexo
-	npm install
-	```
-3. Done
+	The last step is to reinstall hexo program. There is no need to re-install plug-ins.
+2. Done
  
