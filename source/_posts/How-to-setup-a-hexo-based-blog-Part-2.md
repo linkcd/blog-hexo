@@ -82,6 +82,7 @@ git submodule update
 # Restore your blog in a new PC #
 1. Restore source code from Github and install hexo 
 	```bash
+	npm install hexo-cli -g
 	git clone https://github.com/linkcd/blog-hexo.git
 	cd blog-hexo
 	git submodule update --init

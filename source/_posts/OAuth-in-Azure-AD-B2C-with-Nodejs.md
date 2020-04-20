@@ -52,7 +52,7 @@ Remember to give it a meaningful name for your Linkedin idp, as the name will be
 3. After sign in, I would like to have **Display Name**, **Country/Region** and **Job Title** to be included in the claim. In addition, I want to know the **idp** and if **newUser** is true, so select them.
 	{% asset_img "Select application claims.png" "Select application claims" %}
 4. Done
-	{% asset_img "AAD with policies.png" "AAD with policies" %}
+	{% asset_img "News quality.png" "News quality" %}
 
 # Create and register your WebAPI #
 ## Register your WebAPI ##

@@ -10,8 +10,6 @@ tags:
 - Distributed Ledger Technology
 - Tangle
 ---
-(*Also published at [Veracity Blog](https://developer.veracity.com/blog/data-integrity-and-lineage-by-using-dlt-part-1)*)
-
 **Other articles in this series:**
 - Part 1 (this article)
 - [Part 2](http://feng.lu/2018/10/03/Data-Integrity-and-Lineage-by-using-DLT-Part-2/) 
