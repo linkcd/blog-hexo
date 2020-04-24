@@ -10,7 +10,6 @@ tags:
 - Distributed Ledger Technology
 - Tangle
 ---
-
 **Other articles in this series:**
 - [Part 1](http://feng.lu/2018/09/25/Data-Integrity-and-Lineage-by-using-DLT-Part-1/)
 - [Part 2](http://feng.lu/2018/10/03/Data-Integrity-and-Lineage-by-using-DLT-Part-2/) 
@@ -28,7 +27,7 @@ Although the core data schema is quite easy to implement, companies and develope
 
 
 # Data Lineage Service - an open source application to get you started 
-We want to address above challenges, and help everyone to gain benefits of data integrity and lineage. Therefore, we have built "**Data Lineage Service**" application. Developer and companies can apply this technology without deep understanding of IOTA and MAM protocol. It can be used either as a standalone application, or a microservice that integrates with existing systems.
+We want to address above challenges, and help everyone to gain benefits of data integrity and lineage. Therefore, we have built "**Data Lineage Service**" application. Developers and companies can apply this technology without deep understanding of IOTA and MAM protocol. It can be used either as a standalone application, or a microservice that integrates with existing systems.
 
 The key functions are:
 - Wrapped IOTA MAM protocol to well-known HTTP(s) protocol as standard Restful API, with swagger definition. Developers do not need to worry about MAM protocol and it technical details, but focus on the normal data pipeline.
@@ -37,22 +36,29 @@ The key functions are:
 - Built-in functionalities for addressing common issues such as caching and monitoring.
 - It is [open-sourced on github](https://github.com/veracity/data-lineage-service) with MIT license.
 
+<!-- more -->
+
 Also, for one who simply wanna try it out in the live environment, we are hosting this service that connects to the live DLT environment (IOTA tangle mainnet). 
 
 As a live environment, it allows anyone to:
 - Submit and receive integrity/lineage information with the live IOTA tangle mainnet, without maintain his/her own infrastructure.
-- Outsource Proof-of-work (PoW) from clients to the service. Our host environment is taking care of the PoW on the server side. It helps IoT devices with low computing power (such as Raspberry PI) to submit information to DLT without consuming local resource. This also helps to improve the submission throughput (Number of submission per second). 
+- Outsource Proof-of-work (PoW) from clients to the service. Our host environment is taking care of the PoW on the server side. It helps IoT devices with low computing power (such as Raspberry PI) to submit information to DLT without consuming local resources. This also helps to improve the submission throughput (Number of submission per second). 
 - All functions can be done via either web browser or restful APIs.
 - **Zero cost** for testing and building Proof-of-Concept applications with real-world DLT. 
 
-## Source code
-https://github.com/veracity/data-lineage-service
+## Source code of Data-Lineage-Service
+The source code is hosted in Github: https://github.com/veracity/data-lineage-service
 
 ## Live environment
-https://datalineage-viewer.azurewebsites.net
-This live environment is backed by our dedicated infrastructure (IOTA node). We hope to provide more stable connection to IOTA mainnet, but there is no service level agreement yet.
+The live demo environment can be found at https://datalineage-viewer.azurewebsites.net
+This live environment is backed by IOTA public network (public IOTA nodes). Feel free to use it (either GUI or API swagger) to store your integrity and lineage data into IOTA mainnet, as well as visualize the existing data. 
 
-# Real world demo - real-time data integrity on IoT device
+The API Swagger is at https://datalineage-viewer.azurewebsites.net/swagger/ 
+
+Screenshot:
+{% asset_img "datalineage-screenshot.png" "Screenshot of data lineage view" %}
+
+## Real World Demo: Real-time data integrity on IoT device
 By using this service, an IoT device can ensure the integrity of its IoT data stream. As a demo, I have a raspberry pi with [sense hat](https://www.raspberrypi.org/products/sense-hat/) that is reporting temperature as well as saving the integrity information to DLT. The integrity information can be read at [here](https://thetangle.org/mam/UZFQPIFSPRNEXLGYLKQIFUZNZWLSQCUWBFHRWLBJDKIANJLKRMEYAMEPFEFHQBTENPSLPQBKKCVGYLMUN) from DLT. 
 {% youtube uL5f_d1Np20 %}
 Therefore, the data consumer of this temperature sensor can be confident that:
@@ -62,47 +68,35 @@ Therefore, the data consumer of this temperature sensor can be confident that:
 
 The source code of this demo is at https://github.com/linkcd/data-integrity-on-pi
 
+# Performance testing and results
+From day 1, the performance of DLT is a known issue. By expanding this technology into the IoT and real-time data exchanging world, the performance can be a blocking issue. This is also the reason that we started look into IOTA in the beginning, hope its performance can meet the need.
 
-# Closer look at 
-g
-# Demo and source code
+We have conducted the performance testing in 3 iterations:
+1. Using a public IOTA node
+2. Using our own self-hosted IOTA node
+3. Using self-hosted IOTA node but outsource the PoW to https://powsrv.io/
 
-# Performance test result
+In each iteration, we tested performance both for reading and writing. The testing code is also open-sourced at github https://github.com/veracity/IOTA-MAM-performance-testing
 
-# Known issues and how DILaaS helps
+**Test results (on 20.09.2018)**
+{% asset_img "Performace testing.png" "Performance testing" %}
 
- 
+**Conclusion**:
+- Performance of **reading** is OK (0.5 second per read), as far as you have a stable IOTA node (either self-host or from a provider)
+- Outsource the PoW to dedicated service providers such as powsrv.io can significantly improve the performance of **writing**, but the best result allows us to do about 15 transactions per minute. 
 
-
-
-
-
-
-
-1. Standard http(s) protocol for any developers to submit/receive data integrity and lineage information, without dealing with MAM protocol. As far as the developer knows HTTP(s) API and JSON format, he/she is ready to build data integrity and lineage into the product
-2. A basic data lineage visualization that can be reused in different applications.
-
-In addition, for addressing challenge #3, we are also managing our dedicated IOTA node and host the web application on the top of it.
-
-
-
-You can start trying submit and receive data integrity and lineage information via APIs from at https://datalineage-viewer.azurewebsites.net/swagger/ 
-
- 
-
--------------------------------------------------------------------------------------------
-
-
-4. Managing seeds for data sources in a secure manner.
-
-
+# Next step
 In veracity we are researching and building **Data Integrity and Lineage as a Service (DILAAS)**  to bring down the barriers for both data providers and data consumers. DILAAS offers:
 1. A cloud service for managing and exchanging data integrity and lineage information between parties.
-2. Standard HTTP API, without building competence of backend DLT, such as MAM programming. It helps to reduce the development cost and boost the onboard progress.
+2. Standard HTTP(s) API, without building competence of backend DLT, such as MAM programming. It helps to reduce the development cost and boost the onboard progress.
 3. Visualization of data integrity and lineage information.
 4. Managed infrastructure that offers stable IOTA network accessibility. 
 4. Seed/Identity management, for properly managing the seeds/identifies in the secure environment.
 
+**Other articles in this series:**
+- [Part 1](http://feng.lu/2018/09/25/Data-Integrity-and-Lineage-by-using-DLT-Part-1/)
+- [Part 2](http://feng.lu/2018/10/03/Data-Integrity-and-Lineage-by-using-DLT-Part-2/) 
+- Part 3 (this article)
 
 
   

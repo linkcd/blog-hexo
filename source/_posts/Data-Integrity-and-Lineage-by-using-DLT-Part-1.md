@@ -13,7 +13,7 @@ tags:
 **Other articles in this series:**
 - Part 1 (this article)
 - [Part 2](http://feng.lu/2018/10/03/Data-Integrity-and-Lineage-by-using-DLT-Part-2/) 
-- Part 3
+- [Part 3](http://feng.lu/2019/01/03/Data-Integrity-and-Lineage-by-using-DLT-Part-3/)
 
 # Introduction #
 With the proliferation of data – collecting and storing it, sharing it, mining it for gains – a basic question goes unanswered: is this data even good? The quality of data is of utmost concern because you can't do meaningful analysis on data which you can't trust. Here in Veracity, we are trying to address this is very concern. This is a 3 part series, going all the way from concept to a working implementation using DLT (Distributed Ledger Technology).
@@ -180,4 +180,4 @@ In the next article, we will look at this solution in action, by using IOTA as t
 **Other articles in this series:**
 - Part 1 (this article)
 - [Part 2](http://feng.lu/2018/10/03/Data-Integrity-and-Lineage-by-using-DLT-Part-2/) 
-- Part 3
+- [Part 3](http://feng.lu/2019/01/03/Data-Integrity-and-Lineage-by-using-DLT-Part-3/)

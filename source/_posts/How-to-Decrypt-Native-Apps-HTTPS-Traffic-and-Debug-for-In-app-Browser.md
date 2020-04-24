@@ -47,7 +47,9 @@ It is challenging to debug this issue, as it only happens in some of the iOS app
 2. Search on the internet and hope there is a solution for it. 
 3. Let's become a hacker: Perform a [Man-in-the-middle attack](https://en.wikipedia.org/wiki/Man-in-the-middle_attack) between apps and the internet, and to decrypt and manipulate the web traffic of Apps as troubleshooting.
 
-The #1 and #2 are long shots, then I will continue with approach #3.
+The #1 and #2 are long shots, then I will continue with approach #3. The following diagram shows the architecture.
+
+{% asset_img "dzonemitmdiagram.png" "Man-in-the-middle (credit:dzone.com)" %}
 
 ## Let's decrypt the web traffic of a native app with Fiddler
 There some many ways to place a "Man-in-the-middle" between mobile and internet. For example, the famous fiddler can do it. 

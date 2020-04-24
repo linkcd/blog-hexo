@@ -13,7 +13,7 @@ tags:
 **Other articles in this series:**
 - [Part 1](http://feng.lu/2018/09/25/Data-Integrity-and-Lineage-by-using-DLT-Part-1/)
 - Part 2 (this article)
-- Part 3
+- [Part 3](http://feng.lu/2019/01/03/Data-Integrity-and-Lineage-by-using-DLT-Part-3/)
 
 In my previous article, we discussed different approaches for solving the data integrity and lineage challenges, and concluded that the "**Hashing with DLT**" solution is the direction we will move forward. In this article, we will have deep dive into it. Please not that Veracity’s work on data integrity and data lineage is testing many technologies in parallel. We utilise and test proven centralized technologies as well as new distributed ledger technologies like Tangle and Blockchain. This article series uses the IOTA Tangle as the distributed ledger technology. The use cases described can be solved with other technologies. This article does not necessarily reflect the technologies used in Veracity production environments.
 
@@ -305,4 +305,4 @@ Masked Authenticated Messaging (MAM) was introduced by IOTA in Nov 2017. The hig
 **Other articles in this series:**
 - [Part 1](http://feng.lu/2018/09/25/Data-Integrity-and-Lineage-by-using-DLT-Part-1/)
 - Part 2 (this article)
-- Part 3
+- [Part 3](http://feng.lu/2019/01/03/Data-Integrity-and-Lineage-by-using-DLT-Part-3/)
