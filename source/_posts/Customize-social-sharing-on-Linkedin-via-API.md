@@ -8,6 +8,8 @@ tags:
 - OAuth
 - Postman
 ---
+(edited 10.06.2020: Updated how to get User ID as LinkedIn upgraded their endpoints)
+
 # Problem:
 Nowadays it is pretty common to share articles on social media such as Facebook and Linkedin. Thanks to the widely implemented [Open Graph](http://ogp.me/) protocol, sharing is no long just a dry url, but with enrich text and thumbnails.
 
@@ -40,7 +42,7 @@ Use postman application to generate OAuth 2.0 token (Authorization Code Flow). T
 - Auth URL: https://www.linkedin.com/oauth/v2/authorization
 - Access Token URL: https://www.linkedin.com/oauth/v2/accessToken 
 - Call back: https://www.getpostman.com/oauth2/callback (same as in the linkedin app setting)
-- Scope: "r_basicprofile w_member_social" (need "w_member_social" as we need to post)
+- Scope: "r_emailaddress r_liteprofile w_member_social" (need "w_member_social" as we need to post)
 
 Login to generate token
  {% asset_img "Login.png" "Login to generate token" %}
@@ -48,12 +50,34 @@ Login to generate token
 
 ## 3. Get user id from linkedin
 In order to post articles in LinkedIn via API, we need to provide the user id. 
-Make a GET request to API https://api.linkedin.com/v1/people/~:(id), make sure the token from step 2 is included. The result is something like below:
+Make a GET request to API https://api.linkedin.com/v2/me (see [document](https://docs.microsoft.com/en-us/linkedin/shared/integrations/people/profile-api?context=linkedin/marketing/context)), make sure the token from step 2 is included. The result is something like below:
 ```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<person>
-    <id>ABCDEF-z8x</id>
-</person>
+{
+    "localizedLastName": "Lu",
+    "profilePicture": {
+        "displayImage": "urn:li:digitalmediaAsset:BACABCqwPVej-w"
+    },
+    "firstName": {
+        "localized": {
+            "en_US": "Feng"
+        },
+        "preferredLocale": {
+            "country": "US",
+            "language": "en"
+        }
+    },
+    "lastName": {
+        "localized": {
+            "en_US": "Lu"
+        },
+        "preferredLocale": {
+            "country": "US",
+            "language": "en"
+        }
+    },
+    "id": "ABC123-ab1",
+    "localizedFirstName": "Feng"
+}
 ```
 
 ## 4. Customize your article sharing via API
