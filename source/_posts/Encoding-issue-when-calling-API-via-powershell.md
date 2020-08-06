@@ -1,6 +1,6 @@
 ---
 title: Encoding issue when calling API via powershell
-date: 2020-08-04 13:40:00
+date: 2020-06-20 13:40:00
 tags:
 - Powershell
 - Encoding
