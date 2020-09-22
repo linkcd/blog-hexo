@@ -13,7 +13,8 @@ tags:
 ---
 Previously I wrote a blog about how to {% post_link How-to-measure-your-Hamster-s-running-with-IoT 'measure hamster via IoT wheel' %}. This reminds me another personal project I did back to the winter of 2018/2019, for measuring car performance. 
 
-{% asset_img "auris.jpg" "Toyota Auris 2009" %}
+
+{% asset_img "Thumbnail.png" "Thumbnail" %} 
 
 <!-- more -->
 # Other articles in this series:
