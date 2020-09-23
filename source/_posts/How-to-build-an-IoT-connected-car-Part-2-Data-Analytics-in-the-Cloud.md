@@ -1,6 +1,7 @@
 ---
 title: 'How to build an IoT connected car - Part 2: Data Analytics in the Cloud'
 date: 2020-09-22 10:00:13
+thumbnail: /2020/09/22/How-to-build-an-IoT-connected-car-Part-2-Data-Analytics-in-the-Cloud/Thumbnail.png
 tags:
 - IoT
 - Data Analytics

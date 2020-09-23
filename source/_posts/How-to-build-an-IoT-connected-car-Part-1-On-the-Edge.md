@@ -1,6 +1,7 @@
 ---
 title: 'How to build an IoT connected car - Part 1: On the Edge'
 date: 2020-09-15 10:38:12
+thumbnail: /2020/09/15/How-to-build-an-IoT-connected-car-Part-1-On-the-Edge/Thumbnail.png
 tags:
 - IoT
 - Data Analytics
