@@ -35,11 +35,14 @@ In this case, EC2 instances have no public IP, but they can still talk to intern
 ## 4. EC2 instance in private subnet, without NAT connectivity but VPC endpoints
 In this case, the EC2 instance (no public IP) won´t have access internet via NAT but VPC endpoints, some extra works are required
 - 4.1 [Create VPC endpoints for System Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html#sysman-setting-up-vpc-create). Remember to allow HTTPS (port 443) outbound traffic in security group for your endpoint (ssm, ssmmessages and ec2messages)
-- 4.2. Create an IAM Role as EC2 profile that contains [at least the following 2 policies]([bout policies for a Systems Manager instance profile](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-instance-profile.html#instance-profile-policies-overview)
+- 4.2. Create an IAM Role as EC2 profile that contains [at least the following 2 policies](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-instance-profile.html#instance-profile-policies-overview)
  - aws managed policy **AmazonSSMManagedInstanceCore** 
  - [a custom policy](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-instance-profile.html#instance-profile-custom-s3-policy) for accessing an AWS owned S3 buckets.
 - 4.3 Attach this instance profile to your EC2 instance
-- 4.4 In addition, if your EC2 instance need to access other AWS services such as S3, remember to create needed endpoints for them as well.
+- 4.4 Make sure enable "DNS resolution" and "DNS hostnames" for you VPC
+- 4.5 In addition, if your EC2 instance need to access other AWS services such as S3, remember to create needed endpoints for them as well. (For S3 you can choose either Gateway or Endpoint. At this moment Gateway is free.) **Note** that you need to add the endpoint into the private subnet route table. The following screenshot shows the route table entity of a S3 Gateway endpoint, which is using [prefix lists](https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html).
+
+{% asset_img "s3 endpoint in route table.png" "s3 endpoint in route table" %}
 
 ## 5. Verification
 Once the SSM is fully up-and-running, the EC2 instance (either in public/private subnet) will appear in Fleet Manager in SSM web console. 
