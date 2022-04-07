@@ -20,6 +20,17 @@ With SSM:
 
 And SSM works regardless if the EC2 instance is in public or private (NAT or Endpoint) subnet.
 
+Requirements for SSM working:
+- **AWS instances**:
+    - SSM agent installed in instance (pre-installed in many AMIs already)
+    - Connectivity to the AWS public zone endpoint of SSM (IGW, NAT or VPCE)
+    - IAM role providing permissions
+- **On-Prem instances:**
+    - SSM agent installed in instance
+    - Connectivity to the AWS public zone endpoint of SSM (Access to public internet)
+    - Activation (Activation Code and Actuation ID)
+    - IAM role providing permissions
+
 ## 2. EC2 Instance in public subnet
 - 2.1. Make sure the EC2 instance has a public IP. It could be the public IP assigned during creation, or an Elastic IP.
 - 2.2. EC2 instance should have Internet access (for calling SSM endpoint). In public subnet it is done via [Internet Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html). See details from [Session Manager prerequisites](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-prerequisites.html), in "Connectivity to endpoints" section.
