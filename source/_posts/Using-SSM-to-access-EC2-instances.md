@@ -37,6 +37,7 @@ Requirements for SSM working:
 - 2.3. You can use [VPC Reachability Analyzer](https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html) to troubleshoot the connectivity between your EC2 and Internet gateway.
 - 2.4. Create an EC2 Instance profile has IAM policy **AmazonSSMManagedInstanceCore**. Read the details from [Step 4: Create an IAM instance profile for Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-instance-profile.html)
 - 2.5  Attach the EC2 Instance profile to your instance.
+- 2.6  Reboot the EC2 instances.
 
 ## 3. EC2 instance in private subnet, with NAT connectivity
 In this case, EC2 instances have no public IP, but they can still talk to internet via NAT.
