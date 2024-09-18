@@ -32,7 +32,7 @@ include: .nojekyll
 new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
+external_link.enable: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
@@ -74,8 +74,11 @@ feed:
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
+
+## If encounter error during deployment: "RPC failed; HTTP 400 curl 22 The requested URL returned error: 400"
+## Solution: run "git config --global http.postBuffer 157286400"
 deploy:
   type: git
-  repo: 
-    github: https://github.com/linkcd/linkcd.github.io.git
+  repo: https://github.com/linkcd/linkcd.github.io.git
+  branch: master
 
