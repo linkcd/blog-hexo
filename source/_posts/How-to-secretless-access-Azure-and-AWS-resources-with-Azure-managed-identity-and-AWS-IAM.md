@@ -32,6 +32,8 @@ The post will explain how to use [AssumeRoleWithWebIdentity](https://docs.aws.am
 
 We will build an Azure Function with a managed identity, either User-Assigned Managed Identity (UAMI) or System-Assigned Managed Identity (SAMI), to read objects from both an Azure Storage account and an AWS S3 bucket. This same managed identity will work in both Azure and AWS, eliminating the need to manage additional secrets such as AWS IAM user credentials.
 
+The source code is published at github https://github.com/linkcd/Secretless-cross-cloud-access
+
 {% asset_img "architecture.png" "Architecture" %}
 
 <!-- more -->
@@ -155,7 +157,10 @@ screenshot of function.proj
 {% asset_img "azure files.png" "" %}
 {% asset_img "s3 files.png" "" %}
 
-2. The azure function prints oauth JWT in the log, it looks like
+2. Call the Azure Functions
+Use the sample input Json for [UAMI](https://github.com/linkcd/Secretless-cross-cloud-access/blob/main/AzureFunction/sample-request-UAMI.json) and [SAMI](https://github.com/linkcd/Secretless-cross-cloud-access/blob/main/AzureFunction/sample-request-SAMI.json) when you are calling the Azure Functions. (Remember to replace the AWSRoleArn and UAMIClientId with correct values.)
+
+The azure function prints the JWT in the log, it looks like
 ``` json
 {
   "aud": "api://AWS-Federation-App",
