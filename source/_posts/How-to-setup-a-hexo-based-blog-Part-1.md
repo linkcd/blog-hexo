@@ -94,7 +94,7 @@ Modify your _config.xml file to specify the git repository address:
 
 Then you can run below to publish (as far as you has installed hexo-deployer-git plugin):
 ``` bash
-	hexo d
+	hexo generate --deploy  
 ```
 
 ## Done ##
