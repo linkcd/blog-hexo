@@ -1,5 +1,5 @@
 ---
-title: How to secretless access Azure and AWS resources with Azure managed identity and AWS IAM
+title: Implementing Secret-less Access to Azure and AWS with Azure Managed Identities and AWS IAM
 date: 2024-09-18 14:49:21
 tags:
 - Security
@@ -121,7 +121,7 @@ It JTW token issue by Azure is the following, note the "/" in the "idp".
 {% asset_img "add idp to aws.png" "" %}
 
 ### 3.5 Create AWS S3 bucket and related AWS IAM Role for accessing S3
-1. Create an AWS S3 bucket named *mycrosscloudaccessdemos3*
+1. Create an AWS S3 bucket
 2. Go to AWS IAM, create new Role for access S3
 3. **Trusted entity**: the OpenID Connect Idp that we just created
 4. **Audience**: "api://AWS-Federation-App"
@@ -135,8 +135,8 @@ It JTW token issue by Azure is the following, note the "/" in the "idp".
   {% asset_img "sa role arn.png" "" %}
 
 ### 3.6 Create Azure storage account and setup permission for managed identities
-1. Create an Azure storage account *crosscloudazurestorage* and upload some test files into a container named *mycontainer*.
-2. In the storage account *crosscloudazurestorage* management panel, grant UAMI and SAMI “Storage Blob Data Contributor/Owner” Role 
+1. Create an Azure storage account and upload some test files into a container named *mycontainer*.
+2. In the storage account management panel, grant UAMI and SAMI “Storage Blob Data Contributor/Owner” Role 
 (Note, the simple “Owner” role of storage account top level is NOT enough for read/write blobs in container), see [document](https://learn.microsoft.com/en-us/azure/storage/common/storage-auth-aad-app?tabs=dotnet))
 
 ### 3.7 Update Azure function source code 
@@ -158,7 +158,7 @@ screenshot of function.proj
 {% asset_img "s3 files.png" "" %}
 
 2. Call the Azure Functions
-Use the sample input Json for [UAMI](https://github.com/linkcd/Secretless-cross-cloud-access/blob/main/AzureFunction/sample-request-UAMI.json) and [SAMI](https://github.com/linkcd/Secretless-cross-cloud-access/blob/main/AzureFunction/sample-request-SAMI.json) when you are calling the Azure Functions. (Remember to replace the AWSRoleArn and UAMIClientId with correct values.)
+Use the sample input Json for [UAMI](https://github.com/linkcd/Secretless-cross-cloud-access/blob/main/AzureFunction/sample-request-UAMI.json) and [SAMI](https://github.com/linkcd/Secretless-cross-cloud-access/blob/main/AzureFunction/sample-request-SAMI.json) when you are calling the Azure Functions. (Remember to replace the placeholder parameters with correct values.)
 
 The azure function prints the JWT in the log, it looks like
 ``` json
