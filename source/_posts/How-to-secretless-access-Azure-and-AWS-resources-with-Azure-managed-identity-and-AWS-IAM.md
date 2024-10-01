@@ -115,8 +115,6 @@ New-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $serverServicePrinci
 1. Go to AWS console, then head to IAM
 2. Click "Identity providers" and add an "OpenID Connect" provider
 3. **Provider URL**: https://sts.windows.net/[your-azure-tenant-id]/ (note: make sure you add "/" at the end of the URL) 
-After created the idp, in AWS IAM Console, the provider should like "sts.windows.net/YOUR-AZURE-TENANT-ID/"
-It JTW token issue by Azure is the following, note the "/" in the "idp".
 4. **Audience**: Application ID URI "api://AWS-Federation-App"
 {% asset_img "add idp to aws.png" "" %}
 
