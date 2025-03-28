@@ -104,4 +104,4 @@ Currently, this MCP server implementation does not support parameters such as da
 To improve efficiency and reduce token usage, we could implement parameterized API calls. This would allow the AI agent to pass a specific date (e.g., yesterday) and retrieve only the necessary data, making the interaction more precise and resource-efficient.
 
 ### Feedback
-f you have any questions or suggestions, feel free to reach out or create a GitHub issue for the repository: https://github.com/linkcd/tibber-mcp.
+If you have any questions or suggestions, feel free to reach out or create a GitHub issue for the repository: https://github.com/linkcd/tibber-mcp.

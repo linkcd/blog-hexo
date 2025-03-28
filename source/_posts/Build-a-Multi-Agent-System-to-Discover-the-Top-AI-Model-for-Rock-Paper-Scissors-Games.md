@@ -7,7 +7,6 @@ tags:
 - AI
 - GenAI
 - Generative AI
-- Agent
 - AI Agent
 - LangGraph
 - CrewAI
