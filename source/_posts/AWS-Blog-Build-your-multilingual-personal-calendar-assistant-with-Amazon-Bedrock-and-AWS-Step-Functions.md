@@ -3,9 +3,11 @@ title: AWS Blog - Build your multilingual personal calendar assistant with Amazo
 date: 2024-07-04 10:50:24
 tags:
 - AWS 
+- AI
+- AI Agent
 - Generative AI
 - GenAI
-- Amazon Bedrock, 
+- Amazon Bedrock
 - AWS Step Functions
 ---
 Check out [my latest blog post](https://aws.amazon.com/blogs/machine-learning/build-your-multilingual-personal-calendar-assistant-with-amazon-bedrock-and-aws-step-functions/) on AWS official AI/ML blog channel.
