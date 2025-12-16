@@ -79,6 +79,6 @@ feed:
 ## Solution: run "git config --global http.postBuffer 157286400"
 deploy:
   type: git
-  repo: https://github.com/linkcd/linkcd.github.io.git
+  repo: git@github.com:linkcd/linkcd.github.io.git
   branch: master
 
