@@ -13,8 +13,6 @@ tags:
 
 Ever wondered what's really happening with your home's energy consumption at night? Or why your electricity bill suddenly spiked last month?
 
-<!-- more -->
-
 Your smart meter knows everything—every watt, every spike, every pattern. But that data is locked away in vendor apps, making it nearly impossible to analyze, detect anomalies, or build custom alerts.
 
 I built a real-time streaming platform to solve this. It continuously ingests energy data from [Tibber Pulse](https://tibber.com/no/store/produkt/pulse), uses machine learning to detect unusual patterns, and stores everything for long-term analysis.
@@ -27,6 +25,8 @@ The dashboard above shows an EV charging session (5:00 AM to 6:00 AM) detected i
 - **Red line**: Anomaly score calculated by Random Cut Forest algorithm
 - When charging starts, power consumption spikes and anomaly score rises above the threshold
 - The system automatically flags this unusual pattern
+
+<!-- more -->
 
 ## Architecture Overview
 
