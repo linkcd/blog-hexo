@@ -7,9 +7,11 @@ tags:
 - Agentic
 - Generative AI
 - GenAI
+- AWS
 - Amazon Bedrock
 - MCP
 - Model Context Protocol
+- Playwright
 - Automation
 - Invoice Processing
 - Ruter
