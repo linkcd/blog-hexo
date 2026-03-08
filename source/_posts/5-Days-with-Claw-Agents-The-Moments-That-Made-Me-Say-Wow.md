@@ -148,7 +148,7 @@ NanoClaw is extremely lightweight by design. I heavily customized it to enable t
 1. Cross-Slack group/agent collaboration (like the **Daily-News** and **Publisher** exchange)  
 2. Auto-installation of Skills for individual agents
 3. Integrate with LiteLLM for token tracking  
-4. Hexo skill for article publishing  
+4. [Hexo skill](https://github.com/linkcd/hexo-skill) for article publishing  
 
 It’s essentially **AI building AI**, and there’s no turning back.
 
