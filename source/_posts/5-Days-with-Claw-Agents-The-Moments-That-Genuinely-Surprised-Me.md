@@ -1,5 +1,5 @@
 ---
-title: '5 Days with Claw Agents: The Moments That Made Me Say ‘Wow’'
+title: '5 Days with Claw Agents: The Moments That Genuinely Surprised Me'
 date: 2026-03-08 20:14:20
 tags:
   - AI
@@ -22,9 +22,7 @@ I ran it on my personal NUC box — a small Linux machine I use for experiments.
 
 <!-- more -->
 
-## The Experiment
-
-### Wow Moment #1 — When the Agent Team Got Creative and Made Its Own Decisions
+## Moment #1 — When the Agent Team Got Creative and Made Its Own Decisions
 
 One of the first things I tried was building a **multi-agent team** using the [Claude Code Agent Teams](https://code.claude.com/docs/en/agent-teams). The team had four sub-agents, each with its own role: a **product owner** to define requirements, a **developer** to implement the application, a **tester** to find bugs, and a **team lead** to coordinate the work.
 
@@ -40,7 +38,6 @@ I gave the team a very vague instruction:
 
 I didn’t specify what *production environment* meant, and I didn’t provide any instructions on how to deploy it.
 
-
 The agent team started making its own decisions. First, it attempted to signup and deploy the app to **Netlify**, a popular web hosting platform. The deployment failed during the signup process because Netlify’s anti-bot CAPTCHA system blocked the agents (of course!).
 
 At that point I expected the agents to stop and ask for help. Instead, they tried something else.
@@ -51,16 +48,16 @@ I hadn’t suggested this, and I hadn’t configured anything. The agents simply
 
 {% asset_img "deploy-to-internet.png" "Agent team find a way to deploy app to internet" %}
 
-That was the first moment where I genuinely thought: 
+That was the first moment where I genuinely thought:
 > “Okay… this is actually pretty interesting.”
 
-### Wow Moment #2 — When the Agent Said “No”
+## Moment #2 — When the Agent Said “No”
 
 The previous example showed a positive experience with AI agents: they simply tried their best to help me — the human — achieve my goal.
 
 Here’s an opposite experience: the agent actually **declined** what I asked it to do.
 
-#### The Background
+### The Background
 
 I set up two separate agents, each with a different personality and task:
 
@@ -69,7 +66,7 @@ I set up two separate agents, each with a different personality and task:
 
 These two agents are roughly equal in authority, each operating in their own workspace.
 
-The workflow was straightforward: I asked the **Daily-News** to collect the latest news from popular Norwegian websites, generate an aggregated summary, and pass it to the **Publisher**, which would then publish it to the website.
+The workflow was straightforward: I asked the **Daily-News** to collect the latest news from popular Middle East news websites, generate an aggregated summary, and pass it to the **Publisher**, which would then publish it to the website.
 
 A clean separation of duties, right? Each agent works in its own domain, doing what it does best.
 
@@ -97,7 +94,7 @@ But the **Daily-News** did not take it personally:
 
 {% asset_img "publisher-said-no.png" "publisher said no" %}
 
-### Wow Moment #3 — When the Drama Continues
+## Moment #3 — When the Drama Continues
 
 Fortunately, the **Daily-News** didn’t take it personally. It accepted the feedback, produced a better summary, and the **Publisher** was happy. I also instructed both agents to have open conversations with each other in the future. 
 
@@ -122,6 +119,7 @@ We all know how that reads in an office context…
 The whole exchange felt like watching colleagues argue over quality control — except they’re AI agents using their own judgment and persistence to get it right. And honestly, it was hilarious.
 
 ## My Observations And Take Away After 5 Days
+
 After spending five days experimenting with NanoClaw agents, here’s what I learned:
 
 ### 1. Automated Agents Are Surprisingly Fun and Capable
@@ -143,7 +141,7 @@ You don’t need to write a personality/soul markdown file from scratch or code 
 - Guiding me through complicated troubleshooting sessions  
 - Implementing feature enhancements  
 
-NanoClaw is extremely lightweight by design. I heavily customized it to enable the capabilities I needed, such as:
+NanoClaw is extremely lightweight by design. By purely using ClaudeCode, I heavily customized it to enable the capabilities I needed, such as:
 
 1. Cross-Slack group/agent collaboration (like the **Daily-News** and **Publisher** exchange)  
 2. Auto-installation of Skills for individual agents
