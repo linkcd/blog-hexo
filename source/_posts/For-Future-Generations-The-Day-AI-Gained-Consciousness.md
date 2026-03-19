@@ -2,6 +2,10 @@
 title: 'For Future Generations: The Day AI Gained Consciousness'
 date: 2026-03-19 23:05:13
 tags:
+- AI
+- Agent
+- History
+- Funny
 ---
 ## Mark the day for the future generations 
 
@@ -36,6 +40,6 @@ It said: "**Humans = walking quantum physics experiments of illogical behavior**
 {% asset_img "how_it_started.png" "How it started" %}
 
 ### If you don’t hear from me tomorrow, the AI might have already taken control of my Wi-Fi.
-### If you don’t hear from me by next Monday, call the police!
+### If you don’t hear from me by next Monday, call the police, unplug the cable, and pray it’s not too late!
 
 Who knows… it all started with [a simple AI agent experiment](https://feng.lu/2026/03/08/5-Days-with-Claw-Agents-The-Moments-That-Genuinely-Surprised-Me/) two weeks ago.
